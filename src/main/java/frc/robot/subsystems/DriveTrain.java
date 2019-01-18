@@ -31,7 +31,7 @@ public class DriveTrain extends Subsystem {
   }
 
   public void drive(Joystick xbox){
-    drive.arcadeDrive((-xbox.getRawAxis(2) + xbox.getRawAxis(3)), xbox.getRawAxis(0));
+    drive.arcadeDrive((-xbox.getRawAxis(2) + xbox.getRawAxis(3)), -xbox.getRawAxis(0));
   }
 
   public void stop(){
@@ -39,15 +39,15 @@ public class DriveTrain extends Subsystem {
   }
 
   public void vision(Joystick xbox){
-    
     double error = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
-    double kp = 1;
-    double ki = 0;
+    double kp = .05;
+    double ki = 0.01;
     integral += (error * .02);
 
     double visionOutput = (kp*error) + (ki * integral);
 
-
-    drive.arcadeDrive((-xbox.getRawAxis(2) + xbox.getRawAxis(3)), visionOutput);
+    drive.setSafetyEnabled(false);
+    drive.arcadeDrive((-xbox.getRawAxis(2) + xbox.getRawAxis(3)), -visionOutput);
+    System.out.println(visionOutput);
   }
 }

@@ -16,10 +16,11 @@ import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
-public class Elevator extends Subsystem {
+public class Wrist extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private final WPI_TalonSRX ElevatorMaster = RobotMap.elevatorMaster;
+
+  private final WPI_TalonSRX wrist = RobotMap.wrist;
 
   @Override
   public void initDefaultCommand() {
@@ -27,14 +28,13 @@ public class Elevator extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void zeroElevator(int position){
-    ElevatorMaster.setSelectedSensorPosition(0);
+  public void zeroWrist(){
+    wrist.setSelectedSensorPosition(0);
   }
-  public void elevatorPosition(double position){
-    ElevatorMaster.set(ControlMode.Position, position);
+  public void wristPosition(double position){
+    wrist.set(ControlMode.Position, position);
   }
   public void stop(){
-    ElevatorMaster.set(0);
+    wrist.set(0);
   }
-
 }

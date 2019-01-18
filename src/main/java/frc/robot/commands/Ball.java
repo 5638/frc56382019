@@ -7,28 +7,26 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class VisionCom extends Command {
-  public VisionCom() {
+public class Ball extends Command {
+  public double spd;
+  public Ball(double speed) {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.driveTrain);
+    requires(Robot.intake);
+    spd = speed;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0);
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(0);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveTrain.vision(Robot.m_oi.xbox);
+    Robot.intake.ball(spd);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -40,8 +38,7 @@ public class VisionCom extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+    Robot.intake.ball(0);
   }
 
   // Called when another command which requires one or more of the same

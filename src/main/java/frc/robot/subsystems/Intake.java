@@ -7,19 +7,22 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
-public class Elevator extends Subsystem {
+public class Intake extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private final WPI_TalonSRX ElevatorMaster = RobotMap.elevatorMaster;
+
+  private final WPI_VictorSPX intake = RobotMap.intake;
+  private final DoubleSolenoid hatch = RobotMap.hatch;
 
   @Override
   public void initDefaultCommand() {
@@ -27,14 +30,11 @@ public class Elevator extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void zeroElevator(int position){
-    ElevatorMaster.setSelectedSensorPosition(0);
-  }
-  public void elevatorPosition(double position){
-    ElevatorMaster.set(ControlMode.Position, position);
-  }
-  public void stop(){
-    ElevatorMaster.set(0);
+  public void ball(double speed){
+    intake.set(speed);
   }
 
+  public void hatch(Value value){
+    hatch.set(value);
+  }
 }
