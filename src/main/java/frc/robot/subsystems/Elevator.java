@@ -12,7 +12,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.commands.ElevatorCom;
 
 /**
  * Add your docs here.
@@ -21,19 +23,21 @@ public class Elevator extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   private final WPI_TalonSRX ElevatorMaster = RobotMap.elevatorMaster;
-  
-  
+  private final AHRS gyro = Robot.ahrs;
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new ElevatorCom(0));
   }
 
   public void zeroElevator(int position){
     ElevatorMaster.setSelectedSensorPosition(0);
   }
   public void elevatorPosition(double position){
+    if(Math.abs(gyro.getYaw()) > 25){
+      position = 0;
+    }
     ElevatorMaster.set(ControlMode.Position, position);
   }
   public void stop(){
