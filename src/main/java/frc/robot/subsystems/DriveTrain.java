@@ -22,7 +22,7 @@ public class DriveTrain extends Subsystem {
   // here. Call these from Commands.
 
   private final DifferentialDrive drive = RobotMap.drive;
-  private double integral = 0;
+  private double integral, previous_error = 0;
 
   @Override
   public void initDefaultCommand() {
@@ -42,9 +42,12 @@ public class DriveTrain extends Subsystem {
     double error = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
     double kp = .05;
     double ki = 0.01;
+    double kd = 0;
     integral += (error * .02);
+    double derivative = (error - previous_error) / 0.02;
+    previous_error = error;
 
-    double visionOutput = (kp*error) + (ki * integral);
+    double visionOutput = (kp*error) + (ki * integral) + (kd * derivative);
 
     drive.setSafetyEnabled(false);
     drive.arcadeDrive((-xbox.getRawAxis(2) + xbox.getRawAxis(3)), -visionOutput);
