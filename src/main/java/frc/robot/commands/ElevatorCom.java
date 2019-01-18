@@ -30,23 +30,24 @@ public class ElevatorCom extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Math.abs(gyro.getYaw()) > 25){
-      Robot.elevator.elevatorPosition(0);
-    }else{
       Robot.elevator.elevatorPosition(pos);
-    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    if(Math.abs(gyro.getYaw()) > 25){
+      Robot.elevator.elevatorPosition(0);
+      return true;
+    }else{
+      return false;
+    }
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.elevator.stop();
+    Robot.elevator.elevatorPosition(0);
   }
 
   // Called when another command which requires one or more of the same

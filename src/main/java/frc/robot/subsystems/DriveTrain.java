@@ -20,6 +20,9 @@ import frc.robot.commands.DriveCom;
 public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  double  kp = .05, 
+          ki = 0.01, 
+          kd = 0;
 
   private final DifferentialDrive drive = RobotMap.drive;
   private double integral, previous_error = 0;
@@ -40,9 +43,7 @@ public class DriveTrain extends Subsystem {
 
   public void vision(Joystick xbox){
     double error = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
-    double kp = .05;
-    double ki = 0.01;
-    double kd = 0;
+    
     integral += (error * .02);
     double derivative = (error - previous_error) / 0.02;
     previous_error = error;
