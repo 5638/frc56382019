@@ -7,8 +7,13 @@
 
 package frc.robot;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
@@ -26,6 +31,8 @@ public class Robot extends TimedRobot {
   public static Elevator elevator;
   public static Wrist wrist;
   public static Intake intake;
+  public static Ultrasonic ultrasonic;
+  public static AHRS ahrs;
   public static OI m_oi;
 
   //Command m_autonomousCommand;
@@ -42,6 +49,8 @@ public class Robot extends TimedRobot {
     elevator = new Elevator();
     wrist = new Wrist();
     intake = new Intake();
+    ultrasonic = new Ultrasonic(1, 1);
+    ahrs = new AHRS(Port.kMXP);
     m_oi = new OI();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -115,19 +124,17 @@ public class Robot extends TimedRobot {
     //}
   }
 
-  /**
-   * This function is called periodically during operator control.
-   */
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
   }
 
-  /**
-   * This function is called periodically during test mode.
-   */
   @Override
   public void testPeriodic() {
+  }
+
+  public Robot(){
+    SmartDashboard.putNumber("Distance", ultrasonic.getRangeInches());
   }
 
 }

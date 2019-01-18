@@ -7,11 +7,15 @@
 
 package frc.robot.commands;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ElevatorCom extends Command {
   public double pos;
+  private final AHRS gyro = Robot.ahrs;
+
   public ElevatorCom(double position) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.elevator);
@@ -26,7 +30,11 @@ public class ElevatorCom extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.elevator.elevatorPosition(pos);
+    if(Math.abs(gyro.getYaw()) > 25){
+      Robot.elevator.elevatorPosition(0);
+    }else{
+      Robot.elevator.elevatorPosition(pos);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
