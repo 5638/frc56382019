@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
     elevator = new Elevator();
     wrist = new Wrist();
     intake = new Intake();
-    ultrasonic = new Ultrasonic(1, 1);
+    //ultrasonic = new Ultrasonic(1, 1);
     ahrs = new AHRS(Port.kMXP);
     m_oi = new OI();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
@@ -134,7 +134,7 @@ public class Robot extends TimedRobot {
   }
 
   public Robot(){
-    SmartDashboard.putNumber("Distance", ultrasonic.getRangeInches());
+    //SmartDashboard.putNumber("Distance", ultrasonic.getRangeInches());
   }
 
 }

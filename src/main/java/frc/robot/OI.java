@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.Ball;
 import frc.robot.commands.ElevatorCom;
 import frc.robot.commands.Hatch;
+import frc.robot.commands.Shift;
 import frc.robot.commands.VisionCom;
 import frc.robot.commands.WristCom;
 
@@ -26,6 +27,8 @@ public class OI {
 
   //DRIVE START
   public JoystickButton vision;
+  public JoystickButton hi;
+  public JoystickButton lo;
   //DRIVE END
 
   //ELEVATOR START
@@ -52,6 +55,12 @@ public class OI {
     //DRIVE START
     vision = new JoystickButton(xbox, 1);
     vision.whileHeld(new VisionCom());
+
+    hi = new JoystickButton(xbox, 10);
+    hi.toggleWhenPressed(new Shift(Value.kForward));
+
+    lo = new JoystickButton(xbox, 10);
+    lo.toggleWhenPressed(new Shift(Value.kReverse));
     //DRIVE END
 
     //ELEVATOR START

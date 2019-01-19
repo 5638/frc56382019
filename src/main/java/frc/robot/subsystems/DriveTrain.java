@@ -8,29 +8,33 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
-import frc.robot.commands.DriveCom;
+import frc.robot.commands.Shift;
 
 /**
- * An example subsystem.  You can replace me with your own Subsystem.
+ * An example subsystem. You can replace me with your own Subsystem.
  */
 public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   double  kp = .05, 
-          ki = 0.01, 
-          kd = 0;
+          ki = 0.1, 
+          kd = 0.005;
 
   private final DifferentialDrive drive = RobotMap.drive;
+  private final DoubleSolenoid shift = RobotMap.shift;
   private double integral, previous_error = 0;
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new DriveCom());
+    //setDefaultCommand(new DriveCom());
+    setDefaultCommand(new Shift(Value.kForward));
   }
 
   public void drive(Joystick xbox){
@@ -53,6 +57,10 @@ public class DriveTrain extends Subsystem {
     drive.setSafetyEnabled(false);
     drive.arcadeDrive((-xbox.getRawAxis(2) + xbox.getRawAxis(3)), -visionOutput);
     System.out.println(visionOutput);
+  }
+
+  public void shift(Value value){
+    shift.set(value);
   }
 
 }

@@ -33,6 +33,8 @@ public class RobotMap {
   public static SpeedControllerGroup rightGear;
 
   public static DifferentialDrive drive;
+
+  public static DoubleSolenoid shift;
   //DT END
 
   //ELEVATOR START
@@ -62,6 +64,8 @@ public class RobotMap {
     rightGear = new SpeedControllerGroup(rightMaster, rightSlave0/*, rightSlave1*/);
 
     drive = new DifferentialDrive(leftGear, rightGear);
+
+    shift = new DoubleSolenoid(1, 1, 2);
     //DT END
 
     //ELEVATOR START
