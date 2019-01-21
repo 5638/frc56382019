@@ -52,6 +52,9 @@ public class Robot extends TimedRobot {
     ultrasonic = new Ultrasonic(1, 1);
     ahrs = new AHRS(Port.kMXP);
     m_oi = new OI();
+
+    elevator.zeroElevator();
+    wrist.zeroWrist();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);

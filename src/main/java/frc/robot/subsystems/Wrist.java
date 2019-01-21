@@ -32,7 +32,7 @@ public class Wrist extends Subsystem {
     wrist.setSelectedSensorPosition(0);
   }
   public void wristPosition(double position){
-    wrist.set(ControlMode.Position, position);
+    wrist.set(ControlMode.MotionMagic, position);
   }
   public void stop(){
     wrist.set(0);

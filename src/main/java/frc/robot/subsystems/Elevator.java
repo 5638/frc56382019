@@ -31,14 +31,14 @@ public class Elevator extends Subsystem {
     setDefaultCommand(new ElevatorCom(0));
   }
 
-  public void zeroElevator(int position){
+  public void zeroElevator(){
     ElevatorMaster.setSelectedSensorPosition(0);
   }
   public void elevatorPosition(double position){
     if(Math.abs(gyro.getYaw()) > 25){
       position = 0;
     }
-    ElevatorMaster.set(ControlMode.Position, position);
+    ElevatorMaster.set(ControlMode.MotionMagic, position);
   }
   public void stop(){
     ElevatorMaster.set(0);

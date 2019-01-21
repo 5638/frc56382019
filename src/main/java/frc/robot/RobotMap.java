@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -52,9 +53,11 @@ public class RobotMap {
   public static void init(){
     //DT START
     leftMaster = new WPI_TalonSRX(1);
+    leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     leftSlave0 = new WPI_VictorSPX(2);
     //leftSlave1 = new WPI_VictorSPX(3);
     rightMaster = new WPI_TalonSRX(3);
+    rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     rightSlave0 = new WPI_VictorSPX(4);
     //rightSlave1 = new WPI_VictorSPX(6);
 
@@ -66,11 +69,16 @@ public class RobotMap {
 
     //ELEVATOR START
     elevatorMaster = new WPI_TalonSRX(7);
+    elevatorMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    elevatorMaster.selectProfileSlot(0, 0);
     elevatorMaster.config_kP(0, 0, 10);
     elevatorMaster.config_kI(0, 0, 10);
     elevatorMaster.config_kD(0, 0, 10);
+    elevatorMaster.config_kF(0, 0, 10);
     elevatorMaster.configPeakOutputForward(1, 10);
     elevatorMaster.configPeakOutputReverse(-1, 10);
+    elevatorMaster.configMotionCruiseVelocity(15000, 10);
+		elevatorMaster.configMotionAcceleration(6000, 10);
     
     elevatorSlave = new WPI_VictorSPX(8);
     elevatorSlave.follow(elevatorMaster);
@@ -78,11 +86,16 @@ public class RobotMap {
 
     //WRIST START
     wrist = new WPI_TalonSRX(9);
+    wrist.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    wrist.selectProfileSlot(0, 0);
     wrist.config_kP(0, 0, 10);
     wrist.config_kI(0, 0, 10);
     wrist.config_kD(0, 0, 10);
+    wrist.config_kF(0, 0, 10);
     wrist.configPeakOutputForward(1, 10);
     wrist.configPeakOutputReverse(-1, 10);
+    wrist.configMotionCruiseVelocity(15000, 10);
+		wrist.configMotionAcceleration(6000, 10);
     //WRIST END
 
     //INTAKE START
