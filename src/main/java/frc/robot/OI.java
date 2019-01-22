@@ -16,6 +16,7 @@ import frc.robot.commands.Hatch;
 import frc.robot.commands.Shift;
 import frc.robot.commands.VisionCom;
 import frc.robot.commands.WristCom;
+import frc.robot.Equations;
 
 /**
  * This class is the glue that binds the controls on the physical operator
