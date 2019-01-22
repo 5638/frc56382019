@@ -12,12 +12,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class Shift extends Command {
-  public Value val;
+  public Value value;
 
   public Shift(Value value) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.driveTrain);
-    val = value;
+    this.value = value;
   }
 
   // Called just before this Command runs the first time
@@ -28,7 +28,7 @@ public class Shift extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveTrain.shift(val);
+    Robot.driveTrain.shift(value);
   }
 
   // Make this return true when this Command no longer needs to run execute()

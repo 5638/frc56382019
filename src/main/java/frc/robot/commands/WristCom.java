@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class WristCom extends Command {
-  public double pos;
+  public double position;
   public WristCom(double position) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.wrist);
-    pos = position;
+    this.position = position; //this sets the class variable equal to the function variable.
   }
 
   // Called just before this Command runs the first time
@@ -26,7 +26,7 @@ public class WristCom extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.wrist.wristPosition(pos);
+    Robot.wrist.wristPosition(position);
   }
 
   // Make this return true when this Command no longer needs to run execute()

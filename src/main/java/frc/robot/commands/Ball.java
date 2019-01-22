@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class Ball extends Command {
-  public double spd;
+  public double speed;
   public Ball(double speed) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.intake);
-    spd = speed;
+    this.speed = speed;
   }
 
   // Called just before this Command runs the first time
@@ -26,7 +26,7 @@ public class Ball extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.intake.ball(spd);
+    Robot.intake.ball(speed);
   }
 
   // Make this return true when this Command no longer needs to run execute()

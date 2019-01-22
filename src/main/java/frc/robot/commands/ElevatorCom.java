@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ElevatorCom extends Command {
-  public double pos;
+  public double position;
 
   public ElevatorCom(double position) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.elevator);
-    pos = position;
+    this.position = position;
   }
 
   // Called just before this Command runs the first time
@@ -28,7 +28,7 @@ public class ElevatorCom extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-      Robot.elevator.elevatorPosition(pos);
+      Robot.elevator.elevatorPosition(position);
   }
 
   // Make this return true when this Command no longer needs to run execute()
