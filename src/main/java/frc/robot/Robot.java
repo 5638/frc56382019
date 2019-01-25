@@ -32,7 +32,7 @@ public class Robot extends TimedRobot {
   public static Wrist wrist;
   public static Intake intake;
   public static Ultrasonic ultrasonic;
-  public static AHRS ahrs;
+  public static AHRS gyro;
   public static OI m_oi;
 
   //Command m_autonomousCommand;
@@ -50,7 +50,7 @@ public class Robot extends TimedRobot {
     wrist = new Wrist();
     intake = new Intake();
     //ultrasonic = new Ultrasonic(1, 1);
-    ahrs = new AHRS(Port.kMXP);
+    gyro = new AHRS(Port.kMXP);
     m_oi = new OI();
 
     elevator.zeroElevator();

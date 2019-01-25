@@ -18,11 +18,11 @@ public class Equations {
                                 //2 rots will be 8192 ticks, and .5 rots will be 2048 ticks and so on...
     }
 
-    public double rotationToHeight(double Height){
-        return ;
-    }
+    //public double rotationToHeight(double Height){
+    //    return ;
+    //}
 
-    public double rotationToDegrees(double Degrees){  
+    public static double degreesToRotation(double Degrees){  
         return (Degrees*4096)/360;    //same as above but divide by 360 to get degrees
                                         //1 rot is 360 (4096 ticks) degrees so (360*4096)/360 = 4096
                                         //.25 rot should be 90 (1024 ticks) degrees so (90*4096)/360 = 1024

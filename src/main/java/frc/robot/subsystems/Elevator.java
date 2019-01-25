@@ -23,7 +23,7 @@ public class Elevator extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   private final WPI_TalonSRX ElevatorMaster = RobotMap.elevatorMaster;
-  private final AHRS gyro = Robot.ahrs;
+  private final AHRS gyro = Robot.gyro;
 
   @Override
   public void initDefaultCommand() {

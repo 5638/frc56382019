@@ -88,10 +88,10 @@ public class OI {
 
     //WRIST START
     wrist0 = new JoystickButton(xbox, 8);
-    wrist0.whenPressed(new WristCom(0));
+    wrist0.whenPressed(new WristCom(Equations.degreesToRotation(0)));
 
     wrist90 = new JoystickButton(xbox, 9);
-    wrist90.whenPressed(new WristCom(90));
+    wrist90.whenPressed(new WristCom(Equations.degreesToRotation(90)));
     //WRIST END
   }
 
