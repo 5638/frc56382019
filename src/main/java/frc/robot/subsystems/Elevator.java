@@ -34,6 +34,7 @@ public class Elevator extends Subsystem {
   public void zeroElevator(){
     ElevatorMaster.setSelectedSensorPosition(0);
   }
+
   public void elevatorPosition(double position){
 
     if(Math.abs(gyro.getYaw()) > 25){
@@ -43,6 +44,11 @@ public class Elevator extends Subsystem {
     ElevatorMaster.set(ControlMode.MotionMagic, position);
     System.out.println("Elevator Target Position: " + position);
   }
+
+  public void elevatorManualControl(double speed){
+    ElevatorMaster.set(speed);
+  }
+
   public void stop(){
     ElevatorMaster.set(0);
   }

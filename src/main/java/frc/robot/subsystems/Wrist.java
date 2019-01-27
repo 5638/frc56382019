@@ -38,4 +38,8 @@ public class Wrist extends Subsystem {
   public void stop(){
     wrist.set(0);
   }
+
+  public void wristManual(double speed){
+    wrist.set(speed);
+  }
 }

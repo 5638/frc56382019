@@ -42,24 +42,30 @@ public class RobotMap {
   public static void init(){
     //DT START
     leftMaster = new WPI_TalonSRX(1);
+    leftMaster.configFactoryDefault();
     leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    leftMaster.configOpenloopRamp(1, 10);
     leftSlave0 = new WPI_VictorSPX(2);
-    //leftSlave1 = new WPI_VictorSPX(3);
-    rightMaster = new WPI_TalonSRX(3);
-    rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    rightSlave0 = new WPI_VictorSPX(4);
-    //rightSlave1 = new WPI_VictorSPX(6);
 
-    leftGear = new SpeedControllerGroup(leftMaster, leftSlave0/*, leftSlave1*/);
-    rightGear = new SpeedControllerGroup(rightMaster, rightSlave0/*, rightSlave1*/);
+    rightMaster = new WPI_TalonSRX(3);
+    rightMaster.configFactoryDefault();
+    rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    rightMaster.configOpenloopRamp(1, 10);
+    rightSlave0 = new WPI_VictorSPX(4);
+
+    leftGear = new SpeedControllerGroup(leftMaster, leftSlave0);
+    rightGear = new SpeedControllerGroup(rightMaster, rightSlave0);
 
     drive = new DifferentialDrive(leftGear, rightGear);
 
     shift = new DoubleSolenoid(1, 1, 2);
+
+    System.out.println("DRIVE ... GO.");
     //DT END
 
     //ELEVATOR START
-    elevatorMaster = new WPI_TalonSRX(7);
+    elevatorMaster = new WPI_TalonSRX(5);
+    elevatorMaster.configFactoryDefault();
     elevatorMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     elevatorMaster.selectProfileSlot(0, 0);
     elevatorMaster.config_kP(0, 0, 10);
@@ -71,12 +77,15 @@ public class RobotMap {
     elevatorMaster.configMotionCruiseVelocity(15000, 10);
 		elevatorMaster.configMotionAcceleration(6000, 10);
     
-    elevatorSlave = new WPI_VictorSPX(8);
+    elevatorSlave = new WPI_VictorSPX(6);
     elevatorSlave.follow(elevatorMaster);
+
+    System.out.println("ELEVATOR ... WE ARE GO.");
     //ELEVATOR END
 
     //WRIST START
-    wrist = new WPI_TalonSRX(9);
+    wrist = new WPI_TalonSRX(7);
+    wrist.configFactoryDefault();
     wrist.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     wrist.selectProfileSlot(0, 0);
     wrist.config_kP(0, 0, 10);
@@ -86,12 +95,17 @@ public class RobotMap {
     wrist.configPeakOutputForward(1, 10);
     wrist.configPeakOutputReverse(-1, 10);
     wrist.configMotionCruiseVelocity(15000, 10);
-		wrist.configMotionAcceleration(6000, 10);
+    wrist.configMotionAcceleration(6000, 10);
+    
+    System.out.println("WRIST ... GO FLIGHT.");
     //WRIST END
 
     //INTAKE START
-    intake = new WPI_VictorSPX(10);
+    intake = new WPI_VictorSPX(8);
+    intake.configFactoryDefault();
     hatch = new DoubleSolenoid(0, 0, 1);
+
+    System.out.println("INTAKE ...  WE'RE GO, FLIGHT.");
     //INTAKE END
   }
 }

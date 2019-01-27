@@ -2,10 +2,12 @@ package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
@@ -33,6 +35,9 @@ public class Robot extends TimedRobot {
 
     elevator.zeroElevator();
     wrist.zeroWrist();
+    gyro.zeroYaw();
+
+    System.out.println("DRIVE TEAM, THIS IS ROBOT, I AM GO FOR LAUNCH.");
   }
 
   @Override
@@ -41,6 +46,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
+    System.out.println("LQPV ROBOTICS, THE ROBOT HAS LANDED.");
   }
 
   @Override
@@ -73,6 +79,13 @@ public class Robot extends TimedRobot {
 
   public Robot(){
     //SmartDashboard.putNumber("Distance", ultrasonic.getRangeInches());
+    SmartDashboard.putNumber("Elevator Velocity", RobotMap.elevatorMaster.getSelectedSensorVelocity(0));
+    SmartDashboard.putNumber("Elevator Acceleration", RobotMap.elevatorMaster.getSelectedSensorVelocity(0)/0.02);
+
+    SmartDashboard.putNumber("Wrist Velocity", RobotMap.wrist.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("Wrist Acceleration", RobotMap.wrist.getSelectedSensorVelocity());
+
+    SmartDashboard.putNumber("Time Left", DriverStation.getInstance().getMatchTime());
   }
 
 }
