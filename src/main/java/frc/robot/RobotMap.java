@@ -44,13 +44,13 @@ public class RobotMap {
     leftMaster = new WPI_TalonSRX(1);
     leftMaster.configFactoryDefault();
     leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    leftMaster.configOpenloopRamp(1, 10);
+    //leftMaster.configOpenloopRamp(1, 10);
     leftSlave0 = new WPI_VictorSPX(2);
 
     rightMaster = new WPI_TalonSRX(3);
     rightMaster.configFactoryDefault();
     rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    rightMaster.configOpenloopRamp(1, 10);
+    //rightMaster.configOpenloopRamp(1, 10);
     rightSlave0 = new WPI_VictorSPX(4);
 
     leftGear = new SpeedControllerGroup(leftMaster, leftSlave0);
