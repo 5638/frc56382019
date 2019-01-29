@@ -8,12 +8,15 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.TalonChecker;
 import frc.robot.commands.ElevatorCom;
 
 /**
@@ -29,6 +32,12 @@ public class Elevator extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new ElevatorCom(0));
+  }
+
+  public Elevator(){
+    TalonChecker.checkError("Elevator", ElevatorMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 100), 
+                            "Could not detect Wrist Encoder. Switch to manual control and check encoder ASAP: ",
+                            SmartDashboard.putBoolean("Elevator Encoder", false));
   }
 
   public void zeroElevator(){
