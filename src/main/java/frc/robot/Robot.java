@@ -79,11 +79,6 @@ public class Robot extends TimedRobot {
 
   public Robot(){
     //SmartDashboard.putNumber("Distance", ultrasonic.getRangeInches());
-    SmartDashboard.putNumber("Elevator Velocity", RobotMap.elevatorMaster.getSelectedSensorVelocity(0));
-    SmartDashboard.putNumber("Elevator Acceleration", RobotMap.elevatorMaster.getSelectedSensorVelocity(0)/0.02);
-
-    SmartDashboard.putNumber("Wrist Velocity", RobotMap.wrist.getSelectedSensorVelocity());
-    SmartDashboard.putNumber("Wrist Acceleration", RobotMap.wrist.getSelectedSensorVelocity());
 
     SmartDashboard.putNumber("Time Left", DriverStation.getInstance().getMatchTime());
   }

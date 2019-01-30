@@ -38,6 +38,9 @@ public class Elevator extends Subsystem {
     TalonChecker.checkError("Elevator", ElevatorMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 100), 
                             "Could not detect Wrist Encoder. Switch to manual control and check encoder ASAP: ",
                             SmartDashboard.putBoolean("Elevator Encoder", false));
+
+    SmartDashboard.putNumber("Elevator Velocity", RobotMap.elevatorMaster.getSelectedSensorVelocity(0));
+    SmartDashboard.putNumber("Elevator Acceleration", RobotMap.elevatorMaster.getSelectedSensorVelocity(0)/0.02);
   }
 
   public void zeroElevator(){

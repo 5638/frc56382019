@@ -35,6 +35,9 @@ public class Wrist extends Subsystem {
     TalonChecker.checkError("Wrist", wrist.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 100), 
                             "Could not detect Wrist Encoder. Switch to manual control and check encoder ASAP: ",
                             SmartDashboard.putBoolean("Wrist Encoder", false));
+
+    SmartDashboard.putNumber("Wrist Velocity", RobotMap.wrist.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("Wrist Acceleration", RobotMap.wrist.getSelectedSensorVelocity());
   }
 
   public void zeroWrist(){
