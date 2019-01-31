@@ -2,10 +2,13 @@ package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
@@ -19,6 +22,7 @@ public class Robot extends TimedRobot {
   public static Ultrasonic ultrasonic;
   public static AHRS gyro;
   public static OI m_oi;
+  public static PowerDistributionPanel pdp;
 
   @Override
   public void robotInit() {
@@ -30,6 +34,7 @@ public class Robot extends TimedRobot {
     //ultrasonic = new Ultrasonic(1, 1);
     gyro = new AHRS(Port.kMXP);
     m_oi = new OI();
+    pdp = new PowerDistributionPanel();
 
     elevator.zeroElevator();
     wrist.zeroWrist();
@@ -73,6 +78,8 @@ public class Robot extends TimedRobot {
 
   public Robot(){
     //SmartDashboard.putNumber("Distance", ultrasonic.getRangeInches());
+    SmartDashboard.putNumber("PDP Current", pdp.getTotalCurrent());
+    SmartDashboard.putNumber("PDP Voltage", pdp.getVoltage());
   }
 
 }

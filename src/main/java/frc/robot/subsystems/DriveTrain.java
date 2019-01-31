@@ -48,15 +48,15 @@ public class DriveTrain extends Subsystem {
   public void vision(Joystick xbox){
     double ta0 = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta0").getDouble(0);
     double ta1 = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta0").getDouble(0);
+    double tx0 = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx0").getDouble(0);
+    double tx1 = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx1").getDouble(0);
     double error = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
-    double ta0err = Math.abs((ta1 - ta0)/ta1); //change difference in area to % error
-    double ta1err = Math.abs((ta0 - ta1)/ta0);
 
     //FOR GETTING PERPENDICULAR TO TARGET
-    if(ta0err > .05){
-      error = error - ta1;
-    }else if(ta1err > .05){
-      error = error - ta0;
+    if(ta0 < ta1){
+      error = error - tx1;
+    }else if(ta1 < ta0){
+      error = error - tx0;
     }else{
       error = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
     }
@@ -71,8 +71,6 @@ public class DriveTrain extends Subsystem {
     drive.setSafetyEnabled(false);
     drive.arcadeDrive((-xbox.getRawAxis(2) + xbox.getRawAxis(3)), -visionOutput);
     System.out.println("Final Motor Output: " + visionOutput);
-    System.out.println("ta0err: " + ta0err);
-    System.out.println("ta1err: " + ta1err);
   }
 
   public void shift(Value value){
