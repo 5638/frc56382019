@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -28,6 +30,13 @@ public class DriveTrain extends Subsystem {
 
   private final DifferentialDrive drive = RobotMap.drive;
   private final DoubleSolenoid shift = RobotMap.shift;
+  private final WPI_TalonSRX right = RobotMap.rightMaster;
+  private final WPI_TalonSRX left = RobotMap.leftMaster;
+  private final WPI_TalonSRX elevator = RobotMap.elevatorMaster;
+
+  private double elevatorHeight = elevator.getSelectedSensorPosition(0);
+  private double rampSpeed = elevatorHeight/15000;
+
   private double integral, previous_error = 0;
 
   @Override
@@ -39,6 +48,9 @@ public class DriveTrain extends Subsystem {
 
   public void drive(Joystick xbox){
     drive.arcadeDrive((-xbox.getRawAxis(2) + xbox.getRawAxis(3)), -xbox.getRawAxis(0));
+
+    right.configOpenloopRamp(rampSpeed, 10);
+    left.configOpenloopRamp(rampSpeed, 10);
   }
 
   public void stop(){

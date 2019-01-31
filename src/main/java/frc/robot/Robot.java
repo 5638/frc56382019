@@ -38,6 +38,9 @@ public class Robot extends TimedRobot {
 
     elevator.zeroElevator();
     wrist.zeroWrist();
+    gyro.zeroYaw();
+
+    System.out.println("DRIVE TEAM, THIS IS ROBOT, I AM GO FOR LAUNCH.");
   }
 
   @Override
@@ -46,6 +49,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
+    System.out.println("LQPV ROBOTICS, THE ROBOT HAS LANDED.");
   }
 
   @Override

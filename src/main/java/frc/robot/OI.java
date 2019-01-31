@@ -5,11 +5,12 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.Ball;
 import frc.robot.commands.ElevatorCom;
+import frc.robot.commands.ElevatorManual;
 import frc.robot.commands.Hatch;
 import frc.robot.commands.Shift;
 import frc.robot.commands.VisionCom;
 import frc.robot.commands.WristCom;
-import frc.robot.Equations;
+import frc.robot.commands.WristManual;
 
 public class OI {
 
@@ -37,6 +38,14 @@ public class OI {
   public JoystickButton clampHatch;
   public JoystickButton releaseHatch;
   //INTAKE END
+
+  //TEST MODE 
+  public JoystickButton elevatorManualUp;
+  public JoystickButton elevatorManualDo;
+
+  public JoystickButton wristManualUp;
+  public JoystickButton wristManualDo;
+  //TEST MODE END
 
 
   public OI(){
@@ -82,6 +91,22 @@ public class OI {
     wrist90 = new JoystickButton(xbox, 9);
     wrist90.whenPressed(new WristCom(Equations.degreesToRotation(90)));
     //WRIST END
+
+
+
+    //TEST MODE
+    elevatorManualUp = new JoystickButton(xbox, 10);
+    elevatorManualUp.whileHeld(new ElevatorManual(1));
+
+    elevatorManualDo = new JoystickButton(xbox, 11);
+    elevatorManualDo.whileHeld(new ElevatorManual(-1));
+
+    wristManualUp = new JoystickButton(xbox, 12);
+    wristManualUp.whileHeld(new WristManual(1));
+
+    wristManualDo = new JoystickButton(xbox, 13);
+    wristManualDo.whileHeld(new WristManual(-1));
+    //TEST MODE END
   }
 
 }
