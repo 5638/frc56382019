@@ -36,7 +36,7 @@ public class Elevator extends Subsystem {
 
   public Elevator(){
     TalonChecker.checkError("Elevator", ElevatorMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 100), 
-                            "Could not detect Wrist Encoder. Switch to manual control and check encoder ASAP: ",
+                            "Could not detect Elevator Encoder. Switch to manual control and check encoder ASAP: ",
                             SmartDashboard.putBoolean("Elevator Encoder", false));
 
     SmartDashboard.putNumber("Elevator Velocity", RobotMap.elevatorMaster.getSelectedSensorVelocity(0));
@@ -49,7 +49,7 @@ public class Elevator extends Subsystem {
 
   public void elevatorPosition(double position){
 
-    if(Math.abs(gyro.getYaw()) > 25){
+    if(Math.abs(gyro.getPitch()) > 25 || Math.abs(gyro.getRoll()) > 25){
       position = 0;
     }
 

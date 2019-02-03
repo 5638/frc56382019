@@ -37,7 +37,7 @@ public class Robot extends TimedRobot {
 
     elevator.zeroElevator();
     wrist.zeroWrist();
-    gyro.zeroYaw();
+    gyro.reset();
 
     System.out.println("DRIVE TEAM, THIS IS ROBOT, I AM GO FOR LAUNCH.");
   }
@@ -81,8 +81,8 @@ public class Robot extends TimedRobot {
 
   public Robot(){
     //SmartDashboard.putNumber("Distance", ultrasonic.getRangeInches());
-    SmartDashboard.putNumber("PDP Current", pdp.getTotalCurrent());
-    SmartDashboard.putNumber("PDP Voltage", pdp.getVoltage());
+    //SmartDashboard.putNumber("PDP Current", pdp.getTotalCurrent());
+    //SmartDashboard.putNumber("PDP Voltage", pdp.getVoltage());
   }
 
 }

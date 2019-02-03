@@ -45,7 +45,7 @@ public class Wrist extends Subsystem {
   }
   public void wristPosition(double position){
     wrist.set(ControlMode.MotionMagic, position);
-    System.out.println("Elevator Target Position: " + position);
+    System.out.println("Wrist Target Position: " + position);
   }
   public void stop(){
     wrist.set(0);

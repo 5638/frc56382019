@@ -36,8 +36,7 @@ public class DriveTrain extends Subsystem {
   private final WPI_TalonSRX left = RobotMap.leftMaster;
   private final WPI_TalonSRX elevator = RobotMap.elevatorMaster;
 
-  private double elevatorHeight = elevator.getSelectedSensorPosition(0);
-  private double rampSpeed = elevatorHeight/15000;
+  private static final double maxElevatorHeight = 15000;
 
   private double integral, previous_error = 0;
 
@@ -50,9 +49,14 @@ public class DriveTrain extends Subsystem {
     setDefaultCommand(new Shift(Value.kForward));
   }
 
+  private double getElevatorHeight(){
+    return elevator.getSelectedSensorPosition(0);
+  }
+
   public void drive(Joystick xbox){
     drive.arcadeDrive((-xbox.getRawAxis(2) + xbox.getRawAxis(3)), -xbox.getRawAxis(0));
 
+    double rampSpeed = (getElevatorHeight()/maxElevatorHeight) + 1;
     right.configOpenloopRamp(rampSpeed, 10);
     left.configOpenloopRamp(rampSpeed, 10);
   }
@@ -123,43 +127,31 @@ public class DriveTrain extends Subsystem {
   }
 
   public boolean isHigh(){
-    if(shift.get() == Value.kForward){
-      return true;
-    }else{
-      return false;
-    }
+    return shift.get() == Value.kForward;
   }
 
   public boolean isLow(){
-    if(shift.get() == Value.kReverse){
-      return true;
-    }else{
-      return false;
-    }
+    return shift.get() == Value.kReverse;
   }
 
   public boolean wantsHigh(){
-    if(getAverageVelocity() > 4000 || getAverageAcceleration() < 2000){
+    if(getAverageVelocity() > 4000 || getAverageAcceleration() < 2000 && getElevatorHeight() < 10000){
       return true;
-    }else if(elevatorHeight > 10000){ //prevents shifting with elevator up
-      return false;
     }else{
       return false;
     }
   }
 
   public boolean wantsLow(){
-    if(getAverageVelocity() < 3000 || getAverageAcceleration() > 3000){
+    if(getAverageVelocity() < 3000 || getAverageAcceleration() > 3000 && getElevatorHeight() < 10000){
       return true;
-    }else if(elevatorHeight > 10000){ //prevents shifting with elevator up
-      return false;
     }else{
       return false;
     }
   }
 
-  public void shift(/*Value value*/){
-    //shift.set(value);
+  public void shift(Value value){
+    shift.set(value);
 
     if(wantsHigh() && isLow() && canShift()){
       shift.set(setHigh());

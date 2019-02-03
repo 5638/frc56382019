@@ -15,6 +15,7 @@ import frc.robot.commands.WristManual;
 public class OI {
 
   public Joystick xbox;
+  public Joystick buttonBoard;
 
   //DRIVE START
   public JoystickButton vision;
@@ -35,7 +36,6 @@ public class OI {
   //INTAKE START
   public JoystickButton intakeBall;
   public JoystickButton outakeBall;
-  public JoystickButton extendHatch;
   public JoystickButton retractHatch;
   public JoystickButton clampHatch;
   public JoystickButton releaseHatch;
@@ -52,23 +52,24 @@ public class OI {
 
   public OI(){
     xbox = new Joystick(0);
+    buttonBoard = new Joystick(1);
 
     //DRIVE START
     vision = new JoystickButton(xbox, 1);
     vision.whileHeld(new VisionCom());
 
-    hi = new JoystickButton(xbox, 10);
+    hi = new JoystickButton(xbox, 2);
     hi.toggleWhenPressed(new Shift(Value.kForward));
 
-    lo = new JoystickButton(xbox, 10);
+    lo = new JoystickButton(xbox, 2);
     lo.toggleWhenPressed(new Shift(Value.kReverse));
     //DRIVE END
 
     //ELEVATOR START
-    elevatorLevel0 = new JoystickButton(xbox, 2);
+    elevatorLevel0 = new JoystickButton(buttonBoard, 1);
     elevatorLevel0.whenPressed(new ElevatorCom(0));
     
-    elevatorLevel1 = new JoystickButton(xbox, 3);
+    elevatorLevel1 = new JoystickButton(buttonBoard, 2);
     elevatorLevel1.whenPressed(new ElevatorCom(1000));
     //ELEVATOR END
 
@@ -79,10 +80,7 @@ public class OI {
     outakeBall = new JoystickButton(xbox, 5);
     outakeBall.whileHeld(new Ball(.5, .5));
 
-    extendHatch = new JoystickButton(xbox, 14);
-    extendHatch.whenPressed(new Hatch(Value.kReverse, Value.kForward));
-
-    retractHatch = new JoystickButton(xbox, 15);
+    retractHatch = new JoystickButton(xbox, 14);
     retractHatch.whenPressed(new Hatch(Value.kReverse, Value.kReverse));
 
     clampHatch = new JoystickButton(xbox, 6);
