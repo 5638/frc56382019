@@ -36,7 +36,9 @@ public class RobotMap {
 
   //INTAKE START
   public static WPI_VictorSPX intake;
-  public static DoubleSolenoid hatch;
+  public static WPI_VictorSPX intake2;
+  public static DoubleSolenoid hatchClamp;
+  public static DoubleSolenoid hatchExtend;
   //INTAKE END
 
   public static void init(){
@@ -58,7 +60,7 @@ public class RobotMap {
 
     drive = new DifferentialDrive(leftGear, rightGear);
 
-    shift = new DoubleSolenoid(1, 1, 2);
+    shift = new DoubleSolenoid(0, 4, 5);
 
     System.out.println("DRIVE ... GO.");
     //DT END
@@ -103,7 +105,10 @@ public class RobotMap {
     //INTAKE START
     intake = new WPI_VictorSPX(8);
     intake.configFactoryDefault();
-    hatch = new DoubleSolenoid(0, 0, 1);
+    intake2 = new WPI_VictorSPX(9);
+    intake2.configFactoryDefault();
+    hatchClamp = new DoubleSolenoid(0, 0, 1);
+    hatchExtend = new DoubleSolenoid(0, 2, 3);
 
     System.out.println("INTAKE ...  WE'RE GO, FLIGHT.");
     //INTAKE END

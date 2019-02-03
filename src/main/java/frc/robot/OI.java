@@ -35,6 +35,8 @@ public class OI {
   //INTAKE START
   public JoystickButton intakeBall;
   public JoystickButton outakeBall;
+  public JoystickButton extendHatch;
+  public JoystickButton retractHatch;
   public JoystickButton clampHatch;
   public JoystickButton releaseHatch;
   //INTAKE END
@@ -72,16 +74,22 @@ public class OI {
 
     //INTAKE START
     intakeBall = new JoystickButton(xbox, 4);
-    intakeBall.whileHeld(new Ball(-.5));
+    intakeBall.whileHeld(new Ball(-.5, -.5));
 
     outakeBall = new JoystickButton(xbox, 5);
-    outakeBall.whileHeld(new Ball(.5));
+    outakeBall.whileHeld(new Ball(.5, .5));
+
+    extendHatch = new JoystickButton(xbox, 14);
+    extendHatch.whenPressed(new Hatch(Value.kReverse, Value.kForward));
+
+    retractHatch = new JoystickButton(xbox, 15);
+    retractHatch.whenPressed(new Hatch(Value.kReverse, Value.kReverse));
 
     clampHatch = new JoystickButton(xbox, 6);
-    clampHatch.whenPressed(new Hatch(Value.kForward));
+    clampHatch.whenPressed(new Hatch(Value.kForward, Value.kForward));
 
     releaseHatch = new JoystickButton(xbox, 7);
-    releaseHatch.whenPressed(new Hatch(Value.kReverse));
+    releaseHatch.whenPressed(new Hatch(Value.kReverse, Value.kForward));
     //INTAKE END
 
     //WRIST START

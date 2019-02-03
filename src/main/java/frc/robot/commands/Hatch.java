@@ -12,11 +12,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class Hatch extends Command {
-  public Value value;
-  public Hatch(Value value) {
+  public Value valueClamp;
+  public Value valueExtend;
+
+  public Hatch(Value valueClamp, Value valueExtend) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.intake);
-    this.value = value;
+    this.valueClamp = valueClamp;
+    this.valueExtend = valueExtend;
   }
 
   // Called just before this Command runs the first time
@@ -27,7 +30,7 @@ public class Hatch extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.intake.hatch(value);
+    Robot.intake.hatch(valueClamp, valueExtend);
   }
 
   // Make this return true when this Command no longer needs to run execute()

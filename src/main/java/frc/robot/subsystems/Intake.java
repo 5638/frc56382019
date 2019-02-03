@@ -22,7 +22,9 @@ public class Intake extends Subsystem {
   // here. Call these from Commands.
 
   private final WPI_VictorSPX intake = RobotMap.intake;
-  private final DoubleSolenoid hatch = RobotMap.hatch;
+  private final WPI_VictorSPX intake2 = RobotMap.intake2;
+  private final DoubleSolenoid hatchClamp = RobotMap.hatchClamp;
+  private final DoubleSolenoid hatchExtend = RobotMap.hatchExtend;
 
   @Override
   public void initDefaultCommand() {
@@ -30,11 +32,13 @@ public class Intake extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void ball(double speed){
-    intake.set(speed);
+  public void ball(double speedInside, double speedOutside){
+    intake.set(speedInside);
+    intake2.set(speedOutside);
   }
 
-  public void hatch(Value value){
-    hatch.set(value);
+  public void hatch(Value valueClamp, Value valueExtend){
+    hatchClamp.set(valueClamp);
+    hatchExtend.set(valueExtend);
   }
 }
