@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -40,6 +41,10 @@ public class RobotMap {
   public static DoubleSolenoid hatchClamp;
   public static DoubleSolenoid hatchExtend;
   //INTAKE END
+
+  //LED START
+  public static Spark led;
+  //LED END
 
   public static void init(){
     //DT START
@@ -112,5 +117,9 @@ public class RobotMap {
 
     System.out.println("INTAKE ...  WE'RE GO, FLIGHT.");
     //INTAKE END
+
+    //LED START
+    led = new Spark(0);
+    //LED END
   }
 }

@@ -2,12 +2,13 @@ package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.I2C.Port;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Ultrasonic;
-import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
@@ -22,6 +23,7 @@ public class Robot extends TimedRobot {
   public static AHRS gyro;
   public static OI m_oi;
   public static PowerDistributionPanel pdp;
+  private final Spark led = RobotMap.led;
 
   @Override
   public void robotInit() {
@@ -49,16 +51,23 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     System.out.println("START SENDING IT BOI");
+    led.set(-.59);
   }
 
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    led.set(-.59);
   }
 
   @Override
   public void autonomousInit() {
     teleopPeriodic(); //go straight to driver control
+    if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue){
+      led.set(.83);
+    }else{
+      led.set(.61);
+    }
   }
 
   @Override
@@ -68,11 +77,25 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue){
+      led.set(.83);
+    }else{
+      led.set(.61);
+    }
   }
 
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue && DriverStation.getInstance().getMatchTime() > 30){
+      led.set(.83);
+    }else if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red && DriverStation.getInstance().getMatchTime() > 30){
+      led.set(.61);
+    }else if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue && DriverStation.getInstance().getMatchTime() < 30){
+      led.set(-.09);
+    }else if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red && DriverStation.getInstance().getMatchTime() < 30){
+      led.set(-.11);
+    }
   }
 
   @Override
