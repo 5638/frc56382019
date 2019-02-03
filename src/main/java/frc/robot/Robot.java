@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
-    System.out.println("LQPV ROBOTICS, THE ROBOT HAS LANDED.");
+    System.out.println("START SENDING IT BOI");
   }
 
   @Override
