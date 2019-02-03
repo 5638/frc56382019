@@ -28,6 +28,8 @@ public class DriveTrain extends Subsystem {
           ki = 0.1, 
           kd = 0.005;
 
+  
+
   private final DifferentialDrive drive = RobotMap.drive;
   private final DoubleSolenoid shift = RobotMap.shift;
   private final WPI_TalonSRX right = RobotMap.rightMaster;
@@ -38,6 +40,8 @@ public class DriveTrain extends Subsystem {
   private double rampSpeed = elevatorHeight/15000;
 
   private double integral, previous_error = 0;
+
+  public boolean hasShifted = false;
 
   @Override
   public void initDefaultCommand() {
@@ -85,8 +89,84 @@ public class DriveTrain extends Subsystem {
     System.out.println("Final Motor Output: " + visionOutput);
   }
 
-  public void shift(Value value){
-    shift.set(value);
+  //AUTOSHIFT START
+
+  public boolean canShift(){
+    boolean canShift = false;
+
+    if(hasShifted == true){
+      //.02 seconds per loop... .5 second timer... 25 loops for .5 sec
+      for(int time = 0; time < 25; time++){
+        if(time == 25){
+          canShift = true;
+          hasShifted = false;
+        }
+      }
+    }
+    return canShift;
   }
 
+  public int getAverageVelocity(){
+	  return (right.getSelectedSensorVelocity(0) + left.getSelectedSensorVelocity(0)) / 2;
+  }
+
+  public double getAverageAcceleration(){
+    return getAverageVelocity() / 0.02;
+  }
+
+  public Value setHigh(){
+    return Value.kForward;
+  }
+
+  public Value setLow(){
+    return Value.kReverse;
+  }
+
+  public boolean isHigh(){
+    if(shift.get() == Value.kForward){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  public boolean isLow(){
+    if(shift.get() == Value.kReverse){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  public boolean wantsHigh(){
+    if(getAverageVelocity() > 4000 || getAverageAcceleration() < 2000){
+      return true;
+    }else if(elevatorHeight > 10000){ //prevents shifting with elevator up
+      return false;
+    }else{
+      return false;
+    }
+  }
+
+  public boolean wantsLow(){
+    if(getAverageVelocity() < 3000 || getAverageAcceleration() > 3000){
+      return true;
+    }else if(elevatorHeight > 10000){ //prevents shifting with elevator up
+      return false;
+    }else{
+      return false;
+    }
+  }
+
+  public void shift(/*Value value*/){
+    //shift.set(value);
+
+    if(wantsHigh() && isLow() && canShift()){
+      shift.set(setHigh());
+      hasShifted = true;
+    }else if(wantsLow() && isHigh() && canShift()){
+      shift.set(setLow());
+      hasShifted = true;
+    }
+  }
 }
