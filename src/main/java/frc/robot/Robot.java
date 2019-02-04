@@ -23,7 +23,7 @@ public class Robot extends TimedRobot {
   public static AHRS gyro;
   public static OI m_oi;
   public static PowerDistributionPanel pdp;
-  private final Spark led = RobotMap.led;
+  private Spark led;
 
   @Override
   public void robotInit() {
@@ -36,6 +36,8 @@ public class Robot extends TimedRobot {
     gyro = new AHRS(Port.kMXP);
     m_oi = new OI();
     pdp = new PowerDistributionPanel();
+
+    led = RobotMap.led;
 
     elevator.zeroElevator();
     wrist.zeroWrist();
