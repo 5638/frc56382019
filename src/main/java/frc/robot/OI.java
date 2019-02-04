@@ -67,10 +67,10 @@ public class OI {
 
     //ELEVATOR START
     elevatorLevel0 = new JoystickButton(buttonBoard, 1);
-    elevatorLevel0.whenPressed(new ElevatorCom(0));
+    elevatorLevel0.whenPressed(new ElevatorCom(Equations.rotationToHeight(36))); //sets to 36
     
     elevatorLevel1 = new JoystickButton(buttonBoard, 2);
-    elevatorLevel1.whenPressed(new ElevatorCom(1000));
+    elevatorLevel1.whenPressed(new ElevatorCom(Equations.rotationToHeight(12))); //sets to 12"
     //ELEVATOR END
 
     //INTAKE START

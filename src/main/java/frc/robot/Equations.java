@@ -8,9 +8,24 @@ public class Equations {
                                 //2 rots will be 8192 ticks, and .5 rots will be 2048 ticks and so on...
     }
 
-    //public double rotationToHeight(double Height){
-    //    return ;
-    //}
+    public static double rotationToHeight(double heightInInches){
+
+        double C = 2 * Math.PI * 0.895; // ~ 5.62"
+
+        double rotationsPerInch = 4096/C; // ~ 729
+
+        return rotationsPerInch * heightInInches;    
+                    //C = 2*pi*r
+                    //pitch dia = 1.79"
+                    //C = 4096 enc ticks
+                    //C = Elevator height after 1 rot
+                    /*if we want 7 5.62 inches
+                    then 729 * 5.62 ~ 4096 ticks
+
+                    if we want 10 inches
+                    then 729 * 10 ~ 7290 ticks
+                    */
+    }
 
     public static double degreesToRotation(double Degrees){  
         return (Degrees*4096)/360;    //same as above but divide by 360 to get degrees
