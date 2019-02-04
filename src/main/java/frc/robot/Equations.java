@@ -27,6 +27,13 @@ public class Equations {
                     */
     }
 
+    public static double heightToInches(double EncoderCount){
+        double C = 2 * Math.PI * 0.895; // ~ 5.62"
+        double rotationsPerInch = EncoderCount/C; // ~ 729
+
+        return rotationsPerInch;
+    }
+
     public static double degreesToRotation(double Degrees){  
         return (Degrees*4096)/360;    //same as above but divide by 360 to get degrees
                                         //1 rot is 360 (4096 ticks) degrees so (360*4096)/360 = 4096

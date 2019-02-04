@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -18,17 +11,10 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.Shift;
 
-/**
- * An example subsystem. You can replace me with your own Subsystem.
- */
 public class DriveTrain extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
   double  kp = .05, 
           ki = 0.1, 
           kd = 0.005;
-
-  
 
   private final DifferentialDrive drive = RobotMap.drive;
   private final DoubleSolenoid shift = RobotMap.shift;
@@ -44,8 +30,6 @@ public class DriveTrain extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    //setDefaultCommand(new DriveCom());
     setDefaultCommand(new Shift(setHigh()));
   }
 
