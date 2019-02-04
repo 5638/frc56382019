@@ -46,7 +46,7 @@ public class DriveTrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     //setDefaultCommand(new DriveCom());
-    setDefaultCommand(new Shift(Value.kForward));
+    setDefaultCommand(new Shift(setHigh()));
   }
 
   private double getElevatorHeight(){
@@ -56,7 +56,7 @@ public class DriveTrain extends Subsystem {
   public void drive(Joystick xbox){
     drive.arcadeDrive((-xbox.getRawAxis(2) + xbox.getRawAxis(3)), -xbox.getRawAxis(0));
 
-    double rampSpeed = (getElevatorHeight()/maxElevatorHeight) + 1;
+    double rampSpeed = (2 * (getElevatorHeight()/maxElevatorHeight)) + 1;
     right.configOpenloopRamp(rampSpeed, 10);
     left.configOpenloopRamp(rampSpeed, 10);
   }
@@ -66,17 +66,19 @@ public class DriveTrain extends Subsystem {
   }
 
   public void vision(Joystick xbox){
-    double ta0 = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta0").getDouble(0);
-    double ta1 = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta0").getDouble(0);
-    double tx0 = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx0").getDouble(0);
-    double tx1 = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx1").getDouble(0);
-    double error = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+    double ta0, ta1, tx0, tx1, error;
+
+    ta0 = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta0").getDouble(0);
+    ta1 = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta1").getDouble(0);
+    tx0 = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx0").getDouble(0);
+    tx1 = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx1").getDouble(0);
+    error = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
 
     //FOR GETTING PERPENDICULAR TO TARGET
-    if(ta0 < ta1){
-      error = error - tx1;
-    }else if(ta1 < ta0){
-      error = error - tx0;
+    if(ta0 < ta1 - (ta1 * 0.05)){
+      error = error + tx0;
+    }else if(ta1 < ta0 - (ta0 * 0.05)){
+      error = error + tx1;
     }else{
       error = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
     }
