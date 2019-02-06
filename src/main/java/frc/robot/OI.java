@@ -7,6 +7,8 @@ import frc.robot.commands.Ball;
 import frc.robot.commands.ElevatorCom;
 import frc.robot.commands.ElevatorManual;
 import frc.robot.commands.Hatch;
+import frc.robot.commands.PlaceHatch;
+import frc.robot.commands.RetrieveHatch;
 import frc.robot.commands.Shift;
 import frc.robot.commands.VisionCom;
 import frc.robot.commands.WristCom;
@@ -37,8 +39,10 @@ public class OI {
   public JoystickButton intakeBall;
   public JoystickButton outakeBall;
   public JoystickButton retractHatch;
-  public JoystickButton clampHatch;
-  public JoystickButton releaseHatch;
+  public JoystickButton retrieveHatch;
+  public JoystickButton placeHatch;
+  public JoystickButton extendHatch;
+  public JoystickButton preHatchIntake;
   //INTAKE END
 
   //TEST MODE 
@@ -83,11 +87,17 @@ public class OI {
     retractHatch = new JoystickButton(xbox, 14);
     retractHatch.whenPressed(new Hatch(Value.kReverse, Value.kReverse));
 
-    clampHatch = new JoystickButton(xbox, 6);
-    clampHatch.whenPressed(new Hatch(Value.kForward, Value.kForward));
+    extendHatch = new JoystickButton(xbox, 20);
+    extendHatch.whenPressed(new Hatch(Value.kForward, Value.kForward));
 
-    releaseHatch = new JoystickButton(xbox, 7);
-    releaseHatch.whenPressed(new Hatch(Value.kReverse, Value.kForward));
+    retrieveHatch = new JoystickButton(xbox, 6);
+    retrieveHatch.whenPressed(new RetrieveHatch());
+
+    placeHatch = new JoystickButton(xbox, 7);
+    placeHatch.whenPressed(new PlaceHatch());
+
+    preHatchIntake = new JoystickButton(xbox, 21);
+    preHatchIntake.whenPressed(new Hatch(Value.kReverse, Value.kForward));
     //INTAKE END
 
     //WRIST START
@@ -102,16 +112,16 @@ public class OI {
 
     //TEST MODE
     elevatorManualUp = new JoystickButton(xbox, 10);
-    elevatorManualUp.whileHeld(new ElevatorManual(1));
+    elevatorManualUp.whileHeld(new ElevatorManual(.5));
 
     elevatorManualDo = new JoystickButton(xbox, 11);
-    elevatorManualDo.whileHeld(new ElevatorManual(-1));
+    elevatorManualDo.whileHeld(new ElevatorManual(-.5));
 
     wristManualUp = new JoystickButton(xbox, 12);
-    wristManualUp.whileHeld(new WristManual(1));
+    wristManualUp.whileHeld(new WristManual(.25));
 
     wristManualDo = new JoystickButton(xbox, 13);
-    wristManualDo.whileHeld(new WristManual(-1));
+    wristManualDo.whileHeld(new WristManual(-.25));
     //TEST MODE END
   }
 

@@ -40,4 +40,8 @@ public class Equations {
                                         //.25 rot should be 90 (1024 ticks) degrees so (90*4096)/360 = 1024
                                         //...there is a method to my madness.
     }
+
+    public static double hatchInches(){
+        return 4;
+    }
 }

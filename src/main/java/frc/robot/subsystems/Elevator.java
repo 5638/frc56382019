@@ -54,4 +54,8 @@ public class Elevator extends Subsystem {
     ElevatorMaster.set(0);
   }
 
+  public double getCurrentPosition(){
+    return ElevatorMaster.getSelectedSensorPosition(0);
+  }
+
 }
