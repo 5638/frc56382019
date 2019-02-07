@@ -17,7 +17,8 @@ import frc.robot.commands.WristManual;
 public class OI {
 
   public Joystick xbox;
-  public Joystick buttonBoard;
+  public Joystick buttonBoard1;
+  public Joystick buttonBoard2;
 
   //DRIVE START
   public JoystickButton vision;
@@ -56,7 +57,7 @@ public class OI {
 
   public OI(){
     xbox = new Joystick(0);
-    buttonBoard = new Joystick(1);
+    buttonBoard1 = new Joystick(1);
 
     //DRIVE START
     vision = new JoystickButton(xbox, 1);
@@ -70,10 +71,10 @@ public class OI {
     //DRIVE END
 
     //ELEVATOR START
-    elevatorLevel0 = new JoystickButton(buttonBoard, 1);
+    elevatorLevel0 = new JoystickButton(buttonBoard1, 1);
     elevatorLevel0.whenPressed(new ElevatorCom(Equations.rotationToHeight(36))); //sets to 36"
     
-    elevatorLevel1 = new JoystickButton(buttonBoard, 2);
+    elevatorLevel1 = new JoystickButton(buttonBoard1, 2);
     elevatorLevel1.whenPressed(new ElevatorCom(Equations.rotationToHeight(12))); //sets to 12"
     //ELEVATOR END
 

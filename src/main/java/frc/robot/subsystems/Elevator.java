@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Equations;
@@ -25,7 +26,7 @@ public class Elevator extends Subsystem {
   public Elevator(){
     TalonChecker.checkError("Elevator", ElevatorMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 100), 
                             "Could not detect Elevator Encoder. Switch to manual control and check encoder ASAP: ",
-                            SmartDashboard.putBoolean("Elevator Encoder", false));
+                            SmartDashboard.putBoolean("Elevator Encoder", TalonChecker.getTrueFalse()));
 
     SmartDashboard.putNumber("Elevator Velocity", RobotMap.elevatorMaster.getSelectedSensorVelocity(0));
     SmartDashboard.putNumber("Elevator Acceleration", RobotMap.elevatorMaster.getSelectedSensorVelocity(0)/0.02);
@@ -46,8 +47,8 @@ public class Elevator extends Subsystem {
     SmartDashboard.putNumber("Elevator Height", Equations.heightToInches(ElevatorMaster.getSelectedSensorPosition(0)));
   }
 
-  public void elevatorManualControl(double speed){
-    ElevatorMaster.set(speed);
+  public void elevatorManualControl(Joystick joystick){ 
+    ElevatorMaster.set(joystick.getRawAxis(0)/2);
   }
 
   public void stop(){

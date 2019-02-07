@@ -1,6 +1,7 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -82,7 +83,8 @@ public class RobotMap {
     elevatorMaster.configPeakOutputForward(1, 10);
     elevatorMaster.configPeakOutputReverse(-1, 10);
     elevatorMaster.configMotionCruiseVelocity(15000, 10);
-		elevatorMaster.configMotionAcceleration(6000, 10);
+    elevatorMaster.configMotionAcceleration(6000, 10);
+    elevatorMaster.setNeutralMode(NeutralMode.Brake);
     
     elevatorSlave = new WPI_VictorSPX(6);
     elevatorSlave.follow(elevatorMaster);
@@ -103,6 +105,7 @@ public class RobotMap {
     wrist.configPeakOutputReverse(-1, 10);
     wrist.configMotionCruiseVelocity(15000, 10);
     wrist.configMotionAcceleration(6000, 10);
+    wrist.setNeutralMode(NeutralMode.Brake);
     
     System.out.println("WRIST ... GO FLIGHT.");
     //WRIST END
