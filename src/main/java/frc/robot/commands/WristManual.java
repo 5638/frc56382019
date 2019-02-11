@@ -5,11 +5,8 @@ import frc.robot.Robot;
 
 public class WristManual extends Command {
 
-  public double speed;
-
-  public WristManual(double speed) {
+  public WristManual() {
     requires(Robot.wrist);
-    this.speed = speed;
   }
 
   @Override
@@ -18,7 +15,7 @@ public class WristManual extends Command {
 
   @Override
   protected void execute() {
-    Robot.wrist.wristManual(speed);
+    Robot.wrist.wristManual(Robot.m_oi.xbox2);
   }
 
   @Override

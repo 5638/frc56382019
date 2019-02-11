@@ -4,10 +4,12 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.TalonChecker;
+import frc.robot.commands.WristManual;
 
 public class Wrist extends Subsystem {
   
@@ -15,6 +17,7 @@ public class Wrist extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new WristManual());
   }
 
   public Wrist(){
@@ -37,7 +40,7 @@ public class Wrist extends Subsystem {
     wrist.set(0);
   }
 
-  public void wristManual(double speed){
-    wrist.set(speed);
+  public void wristManual(Joystick xbox){
+    wrist.set(xbox.getRawAxis(3) * xbox.getRawAxis(3) * xbox.getRawAxis(3));
   }
 }

@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Equations;
@@ -12,6 +13,7 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.TalonChecker;
 import frc.robot.commands.ElevatorCom;
+import frc.robot.commands.ElevatorManual;
 
 public class Elevator extends Subsystem {
   private final WPI_TalonSRX ElevatorMaster = RobotMap.elevatorMaster;
@@ -19,7 +21,7 @@ public class Elevator extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ElevatorCom(0));
+    setDefaultCommand(new ElevatorManual());
   }
 
   public Elevator(){
@@ -37,17 +39,17 @@ public class Elevator extends Subsystem {
 
   public void elevatorPosition(double position){
 
-    if(Math.abs(gyro.getPitch()) > 25 || Math.abs(gyro.getRoll()) > 25){
-      position = 0;
-    }
+    //if(Math.abs(gyro.getPitch()) > 25 || Math.abs(gyro.getRoll()) > 25){
+    //  position = 0;
+    //}
 
     ElevatorMaster.set(ControlMode.MotionMagic, position);
     SmartDashboard.putNumber("Elevator Target Position", position);
     SmartDashboard.putNumber("Elevator Height", Equations.heightToInches(ElevatorMaster.getSelectedSensorPosition(0)));
   }
 
-  public void elevatorManualControl(double speed){
-    ElevatorMaster.set(speed);
+  public void elevatorManualControl(Joystick xbox){
+    ElevatorMaster.set(xbox.getRawAxis(1) * xbox.getRawAxis(1) * xbox.getRawAxis(1));
   }
 
   public void stop(){

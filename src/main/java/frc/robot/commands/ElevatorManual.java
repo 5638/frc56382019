@@ -5,11 +5,8 @@ import frc.robot.Robot;
 
 public class ElevatorManual extends Command {
 
-  public double speed;
-
-  public ElevatorManual(double speed) {
+  public ElevatorManual() {
     requires(Robot.elevator);
-    this.speed = speed;
   }
 
   @Override
@@ -18,7 +15,7 @@ public class ElevatorManual extends Command {
 
   @Override
   protected void execute() {
-    Robot.elevator.elevatorManualControl(speed);
+    Robot.elevator.elevatorManualControl(Robot.m_oi.xbox2);
   }
 
   @Override

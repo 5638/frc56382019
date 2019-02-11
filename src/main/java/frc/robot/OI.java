@@ -17,22 +17,26 @@ import frc.robot.commands.WristManual;
 public class OI {
 
   public Joystick xbox;
-  public Joystick buttonBoard;
+  public Joystick xbox2;
+  public Joystick buttonBoard1;
+  public Joystick buttonBoard2;
 
   //DRIVE START
   public JoystickButton vision;
-  public JoystickButton hi;
-  public JoystickButton lo;
+  public JoystickButton shift;
   //DRIVE END
 
   //ELEVATOR START
-  public JoystickButton elevatorLevel0;
-  public JoystickButton elevatorLevel1;
+  public JoystickButton elevatorLevel1Cargo;
+  public JoystickButton elevatorLevel2Cargo;
+  public JoystickButton elevatorLevel3Cargo;
+  public JoystickButton elevatorLevel1Hatch;
+  public JoystickButton elevatorLevel2Hatch;
+  public JoystickButton elevatorLevel3Hatch;
   //ELEVATOR END
 
   //WRIST START
-  public JoystickButton wrist0;
-  public JoystickButton wrist90;
+  public JoystickButton wristPos;
   //WRIST END
 
   //INTAKE START
@@ -56,72 +60,84 @@ public class OI {
 
   public OI(){
     xbox = new Joystick(0);
-    buttonBoard = new Joystick(1);
+    xbox2 = new Joystick(3);
+    buttonBoard1 = new Joystick(1);
+    buttonBoard2 = new Joystick(2);
 
     //DRIVE START
     vision = new JoystickButton(xbox, 1);
     vision.whileHeld(new VisionCom());
 
-    hi = new JoystickButton(xbox, 2);
-    hi.toggleWhenPressed(new Shift(Value.kForward));
-
-    lo = new JoystickButton(xbox, 2);
-    lo.toggleWhenPressed(new Shift(Value.kReverse));
+    shift = new JoystickButton(xbox, 4);
+    shift.whileHeld(new Shift(Value.kForward));
+    shift.whenReleased(new Shift(Value.kReverse));
     //DRIVE END
 
     //ELEVATOR START
-    elevatorLevel0 = new JoystickButton(buttonBoard, 1);
-    elevatorLevel0.whenPressed(new ElevatorCom(Equations.rotationToHeight(36))); //sets to 36"
+    elevatorLevel1Cargo = new JoystickButton(buttonBoard1, 3);
+    elevatorLevel1Cargo.whenPressed(new ElevatorCom(0));
     
-    elevatorLevel1 = new JoystickButton(buttonBoard, 2);
-    elevatorLevel1.whenPressed(new ElevatorCom(Equations.rotationToHeight(12))); //sets to 12"
+    elevatorLevel2Cargo = new JoystickButton(buttonBoard1, 2);
+    elevatorLevel2Cargo.whenPressed(new ElevatorCom(9900));
+
+    elevatorLevel3Cargo = new JoystickButton(buttonBoard1, 1);
+    elevatorLevel3Cargo.whenPressed(new ElevatorCom(20100));
+
+    elevatorLevel1Hatch = new JoystickButton(buttonBoard1, 6);
+    elevatorLevel1Hatch.whenPressed(new ElevatorCom(2300));
+    
+    elevatorLevel2Hatch = new JoystickButton(buttonBoard1, 5);
+    elevatorLevel2Hatch.whenPressed(new ElevatorCom(12000));
+
+    elevatorLevel3Hatch = new JoystickButton(buttonBoard1, 4);
+    elevatorLevel3Hatch.whenPressed(new ElevatorCom(21100));
     //ELEVATOR END
 
     //INTAKE START
-    intakeBall = new JoystickButton(xbox, 4);
+    intakeBall = new JoystickButton(xbox, 5);
     intakeBall.whileHeld(new Ball(-.5, -.5));
 
-    outakeBall = new JoystickButton(xbox, 5);
+    outakeBall = new JoystickButton(xbox, 6);
     outakeBall.whileHeld(new Ball(.5, .5));
 
-    retractHatch = new JoystickButton(xbox, 14);
+    retractHatch = new JoystickButton(buttonBoard1, 8);
     retractHatch.whenPressed(new Hatch(Value.kReverse, Value.kReverse));
 
-    extendHatch = new JoystickButton(xbox, 20);
+    extendHatch = new JoystickButton(buttonBoard1, 9);
     extendHatch.whenPressed(new Hatch(Value.kForward, Value.kForward));
 
-    retrieveHatch = new JoystickButton(xbox, 6);
+    retrieveHatch = new JoystickButton(xbox, 2);
     retrieveHatch.whenPressed(new RetrieveHatch());
 
-    placeHatch = new JoystickButton(xbox, 7);
+    placeHatch = new JoystickButton(xbox, 3);
     placeHatch.whenPressed(new PlaceHatch());
 
-    preHatchIntake = new JoystickButton(xbox, 21);
+    preHatchIntake = new JoystickButton(buttonBoard2, 3);
     preHatchIntake.whenPressed(new Hatch(Value.kReverse, Value.kForward));
     //INTAKE END
 
     //WRIST START
-    wrist0 = new JoystickButton(xbox, 8);
-    wrist0.whenPressed(new WristCom(Equations.degreesToRotation(0)));
-
-    wrist90 = new JoystickButton(xbox, 9);
-    wrist90.whenPressed(new WristCom(Equations.degreesToRotation(90)));
+    wristPos = new JoystickButton(xbox, 5);
+    wristPos.whileHeld(new WristCom(-9000));
+    wristPos.whenReleased(new WristCom(630));
     //WRIST END
 
 
 
     //TEST MODE
-    elevatorManualUp = new JoystickButton(xbox, 10);
-    elevatorManualUp.whileHeld(new ElevatorManual(.5));
+    /*
+    elevatorManualUp = new JoystickButton(xbox2, 10);
+    elevatorManualUp.whileHeld(new ElevatorManual());
 
-    elevatorManualDo = new JoystickButton(xbox, 11);
-    elevatorManualDo.whileHeld(new ElevatorManual(-.5));
+    elevatorManualDo = new JoystickButton(xbox2, 11);
+    elevatorManualDo.whileHeld(new ElevatorManual());
 
-    wristManualUp = new JoystickButton(xbox, 12);
+    wristManualUp = new JoystickButton(xbox2, 12);
     wristManualUp.whileHeld(new WristManual(.25));
 
-    wristManualDo = new JoystickButton(xbox, 13);
+    wristManualDo = new JoystickButton(xbox2, 13);
     wristManualDo.whileHeld(new WristManual(-.25));
+    */
     //TEST MODE END
   }
 

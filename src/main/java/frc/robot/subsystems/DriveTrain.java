@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
-import frc.robot.commands.Shift;
+import frc.robot.commands.DriveCom;
 
 public class DriveTrain extends Subsystem {
   double  kp = .05, 
@@ -22,7 +22,7 @@ public class DriveTrain extends Subsystem {
   private final WPI_TalonSRX left = RobotMap.leftMaster;
   private final WPI_TalonSRX elevator = RobotMap.elevatorMaster;
 
-  private static final double maxElevatorHeight = 15000;
+  private static final double maxElevatorHeight = 21100;
 
   private double integral, previous_error = 0;
 
@@ -30,7 +30,7 @@ public class DriveTrain extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new Shift(setHigh()));
+    setDefaultCommand(new DriveCom());
   }
 
   private double getElevatorHeight(){
@@ -38,11 +38,12 @@ public class DriveTrain extends Subsystem {
   }
 
   public void drive(Joystick xbox){
-    drive.arcadeDrive((-xbox.getRawAxis(2) + xbox.getRawAxis(3)), -xbox.getRawAxis(0));
-
+    drive.arcadeDrive((xbox.getRawAxis(2) - xbox.getRawAxis(3)), -xbox.getRawAxis(0));
+/*
     double rampSpeed = (2 * (getElevatorHeight()/maxElevatorHeight)) + 1;
     right.configOpenloopRamp(rampSpeed, 10);
     left.configOpenloopRamp(rampSpeed, 10);
+    */
   }
 
   public void stop(){
@@ -59,13 +60,14 @@ public class DriveTrain extends Subsystem {
     error = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
 
     //FOR GETTING PERPENDICULAR TO TARGET
-    if(ta0 < ta1 - (ta1 * 0.05)){
+    /*if(ta0 < ta1 - (ta1 * 0.05)){
       error = error + tx0;
     }else if(ta1 < ta0 - (ta0 * 0.05)){
       error = error + tx1;
     }else{
       error = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
     }
+    */
     //END
     
     integral += (error * .02);

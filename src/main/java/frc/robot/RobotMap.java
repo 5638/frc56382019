@@ -64,6 +64,7 @@ public class RobotMap {
     rightGear = new SpeedControllerGroup(rightMaster, rightSlave0);
 
     drive = new DifferentialDrive(leftGear, rightGear);
+    drive.setSafetyEnabled(false);
 
     shift = new DoubleSolenoid(0, 4, 5);
 
@@ -81,8 +82,8 @@ public class RobotMap {
     elevatorMaster.config_kF(0, 0, 10);
     elevatorMaster.configPeakOutputForward(1, 10);
     elevatorMaster.configPeakOutputReverse(-1, 10);
-    elevatorMaster.configMotionCruiseVelocity(15000, 10);
-		elevatorMaster.configMotionAcceleration(6000, 10);
+    elevatorMaster.configMotionCruiseVelocity(1000, 10);
+		elevatorMaster.configMotionAcceleration(1000, 10);
     
     elevatorSlave = new WPI_VictorSPX(6);
     elevatorSlave.follow(elevatorMaster);
@@ -101,8 +102,8 @@ public class RobotMap {
     wrist.config_kF(0, 0, 10);
     wrist.configPeakOutputForward(1, 10);
     wrist.configPeakOutputReverse(-1, 10);
-    wrist.configMotionCruiseVelocity(15000, 10);
-    wrist.configMotionAcceleration(6000, 10);
+    wrist.configMotionCruiseVelocity(750, 10);
+    wrist.configMotionAcceleration(1000, 10);
     
     System.out.println("WRIST ... GO FLIGHT.");
     //WRIST END
