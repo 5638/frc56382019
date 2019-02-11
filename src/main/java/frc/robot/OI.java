@@ -49,7 +49,7 @@ public class OI {
   public JoystickButton preHatchIntake;
   //INTAKE END
 
-  //TEST MODE 
+  //TEST MODE
   public JoystickButton elevatorManualUp;
   public JoystickButton elevatorManualDo;
 
@@ -76,7 +76,7 @@ public class OI {
     //ELEVATOR START
     elevatorLevel1Cargo = new JoystickButton(buttonBoard1, 3);
     elevatorLevel1Cargo.whenPressed(new ElevatorCom(0));
-    
+
     elevatorLevel2Cargo = new JoystickButton(buttonBoard1, 2);
     elevatorLevel2Cargo.whenPressed(new ElevatorCom(9900));
 
@@ -85,7 +85,7 @@ public class OI {
 
     elevatorLevel1Hatch = new JoystickButton(buttonBoard1, 6);
     elevatorLevel1Hatch.whenPressed(new ElevatorCom(2300));
-    
+
     elevatorLevel2Hatch = new JoystickButton(buttonBoard1, 5);
     elevatorLevel2Hatch.whenPressed(new ElevatorCom(12000));
 

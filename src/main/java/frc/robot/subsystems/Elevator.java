@@ -25,9 +25,9 @@ public class Elevator extends Subsystem {
   }
 
   public Elevator(){
-    TalonChecker.checkError("Elevator", ElevatorMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 100), 
+    TalonChecker.checkError("Elevator", ElevatorMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 100),
                             "Could not detect Elevator Encoder. Switch to manual control and check encoder ASAP: ",
-                            SmartDashboard.putBoolean("Elevator Encoder", false));
+                            SmartDashboard.putBoolean("Elevator Encoder", TalonChecker.getTrueFalse()));
 
     SmartDashboard.putNumber("Elevator Velocity", RobotMap.elevatorMaster.getSelectedSensorVelocity(0));
     SmartDashboard.putNumber("Elevator Acceleration", RobotMap.elevatorMaster.getSelectedSensorVelocity(0)/0.02);
