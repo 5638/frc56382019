@@ -83,6 +83,7 @@ public class RobotMap {
     elevatorMaster.config_kI(0, 0, 10);
     elevatorMaster.config_kD(0, 0, 10);
     elevatorMaster.config_kF(0, 0, 10);
+    elevatorMaster.config_IntegralZone(0, 10, 10);
     elevatorMaster.configPeakOutputForward(1, 10);
     elevatorMaster.configPeakOutputReverse(-1, 10);
     elevatorMaster.configMotionCruiseVelocity(1000, 10);
@@ -104,6 +105,7 @@ public class RobotMap {
     wrist.config_kI(0, 0, 10);
     wrist.config_kD(0, 0, 10);
     wrist.config_kF(0, 0, 10);
+    wrist.config_IntegralZone(0, 10, 10);
     wrist.configPeakOutputForward(1, 10);
     wrist.configPeakOutputReverse(-1, 10);
     wrist.configMotionCruiseVelocity(750, 10);

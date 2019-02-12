@@ -51,6 +51,7 @@ public class Elevator extends Subsystem {
   public double getElevatorAcceleration(){
     return (ElevatorMaster.getSelectedSensorVelocity(0) - previous_vel)/0.02;
   }
+  
   public void elevatorPosition(double position){
 
     //if(Math.abs(gyro.getPitch()) > 25 || Math.abs(gyro.getRoll()) > 25){
