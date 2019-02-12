@@ -9,7 +9,7 @@ public class PlaceHatch extends CommandGroup {
 
   public PlaceHatch() {
     addSequential(new Hatch(Value.kReverse, Value.kForward)); //unclamp
-    addSequential(new ElevatorCom(Robot.elevator.getCurrentPosition() - Equations.rotationToHeight(Equations.hatchInches()))); //drops elevator 4 inches after placement.
+    addSequential(new ElevatorCom(Robot.elevator.getElevatorPosition() - Equations.rotationToHeight(Equations.hatchInches()))); //drops elevator 4 inches after placement.
     addSequential(new Hatch(Value.kReverse, Value.kReverse)); //retracts hatch mech.
   }
 }

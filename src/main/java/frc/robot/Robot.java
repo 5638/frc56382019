@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
@@ -42,6 +43,7 @@ public class Robot extends TimedRobot {
     elevator.zeroElevator();
     wrist.zeroWrist();
     gyro.reset();
+    driveTrain.shift(Value.kForward);
 
     System.out.println("DRIVE TEAM, THIS IS ROBOT, I AM GO FOR LAUNCH.");
   }

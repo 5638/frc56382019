@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveCom;
 
@@ -39,11 +40,13 @@ public class DriveTrain extends Subsystem {
 
   public void drive(Joystick xbox){
     drive.arcadeDrive((xbox.getRawAxis(2) - xbox.getRawAxis(3)), -xbox.getRawAxis(0));
-/*
+
     double rampSpeed = (2 * (getElevatorHeight()/maxElevatorHeight)) + 1;
+    SmartDashboard.putNumber("DT Ramp Speed", rampSpeed);
+    SmartDashboard.putNumber("DT Velocity", getAverageVelocity());
+    SmartDashboard.putNumber("DT Acceleration", getAverageAcceleration());
     right.configOpenloopRamp(rampSpeed, 10);
     left.configOpenloopRamp(rampSpeed, 10);
-    */
   }
 
   public void stop(){

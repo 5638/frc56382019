@@ -12,12 +12,14 @@ import frc.robot.Equations;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.TalonChecker;
-import frc.robot.commands.ElevatorCom;
 import frc.robot.commands.ElevatorManual;
 
 public class Elevator extends Subsystem {
+
   private final WPI_TalonSRX ElevatorMaster = RobotMap.elevatorMaster;
   private final AHRS gyro = Robot.gyro;
+
+  double previous_vel = 0;
 
   @Override
   public void initDefaultCommand() {
@@ -37,6 +39,18 @@ public class Elevator extends Subsystem {
     ElevatorMaster.setSelectedSensorPosition(0);
   }
 
+  public double getElevatorPosition(){
+    return ElevatorMaster.getSelectedSensorPosition(0);
+  }
+
+  public double getElevatorVelocity(){
+    double vel = ElevatorMaster.getSelectedSensorVelocity(0);
+    return vel;
+  }
+
+  public double getElevatorAcceleration(){
+    return (ElevatorMaster.getSelectedSensorVelocity(0) - previous_vel)/0.02;
+  }
   public void elevatorPosition(double position){
 
     //if(Math.abs(gyro.getPitch()) > 25 || Math.abs(gyro.getRoll()) > 25){
@@ -55,9 +69,4 @@ public class Elevator extends Subsystem {
   public void stop(){
     ElevatorMaster.set(0);
   }
-
-  public double getCurrentPosition(){
-    return ElevatorMaster.getSelectedSensorPosition(0);
-  }
-
 }

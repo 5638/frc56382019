@@ -52,12 +52,14 @@ public class RobotMap {
     leftMaster = new WPI_TalonSRX(1);
     leftMaster.configFactoryDefault();
     leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    leftMaster.setNeutralMode(NeutralMode.Coast);
     //leftMaster.configOpenloopRamp(1, 10);
     leftSlave0 = new WPI_VictorSPX(2);
 
     rightMaster = new WPI_TalonSRX(3);
     rightMaster.configFactoryDefault();
     rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    rightMaster.setNeutralMode(NeutralMode.Coast);
     //rightMaster.configOpenloopRamp(1, 10);
     rightSlave0 = new WPI_VictorSPX(4);
 
@@ -84,7 +86,8 @@ public class RobotMap {
     elevatorMaster.configPeakOutputForward(1, 10);
     elevatorMaster.configPeakOutputReverse(-1, 10);
     elevatorMaster.configMotionCruiseVelocity(1000, 10);
-		elevatorMaster.configMotionAcceleration(1000, 10);
+    elevatorMaster.configMotionAcceleration(1000, 10);
+    elevatorMaster.setNeutralMode(NeutralMode.Brake);
 
     elevatorSlave = new WPI_VictorSPX(6);
     elevatorSlave.follow(elevatorMaster);
@@ -105,6 +108,7 @@ public class RobotMap {
     wrist.configPeakOutputReverse(-1, 10);
     wrist.configMotionCruiseVelocity(750, 10);
     wrist.configMotionAcceleration(1000, 10);
+    wrist.setNeutralMode(NeutralMode.Brake);
 
     System.out.println("WRIST ... GO FLIGHT.");
     //WRIST END
@@ -112,8 +116,10 @@ public class RobotMap {
     //INTAKE START
     intake = new WPI_VictorSPX(8);
     intake.configFactoryDefault();
+    intake.setNeutralMode(NeutralMode.Brake);
     intake2 = new WPI_VictorSPX(9);
     intake2.configFactoryDefault();
+    intake2.setNeutralMode(NeutralMode.Brake);
     hatchClamp = new DoubleSolenoid(0, 0, 1);
     hatchExtend = new DoubleSolenoid(0, 2, 3);
 
