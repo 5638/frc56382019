@@ -12,7 +12,7 @@ import frc.robot.Equations;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.TalonChecker;
-import frc.robot.commands.ElevatorCom;
+import frc.robot.commands.ElevatorManual;
 
 public class Elevator extends Subsystem {
 
@@ -25,7 +25,7 @@ public class Elevator extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ElevatorCom(this.position));
+    setDefaultCommand(new ElevatorManual());
   }
 
   public Elevator(){
@@ -78,6 +78,7 @@ public class Elevator extends Subsystem {
     this.position = position;
 
     ElevatorMaster.set(ControlMode.MotionMagic, position);
+    SmartDashboard.putNumber("Elevator output", ElevatorMaster.get());
     SmartDashboard.putNumber("Elevator Target Position", position);
     SmartDashboard.putNumber("Elevator Height", Equations.heightToInches(ElevatorMaster.getSelectedSensorPosition(0)));
   }
