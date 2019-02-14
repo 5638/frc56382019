@@ -2,13 +2,13 @@ package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.I2C.Port;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Ultrasonic;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
@@ -34,7 +34,7 @@ public class Robot extends TimedRobot {
     wrist = new Wrist();
     intake = new Intake();
     //ultrasonic = new Ultrasonic(1, 1);
-    gyro = new AHRS(Port.kMXP);
+    gyro = new AHRS(SPI.Port.kMXP);
     m_oi = new OI();
     pdp = new PowerDistributionPanel();
 
