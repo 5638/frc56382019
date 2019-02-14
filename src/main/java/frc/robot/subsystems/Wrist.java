@@ -25,8 +25,7 @@ public class Wrist extends Subsystem {
                             "Could not detect Wrist Encoder. Switch to manual control and check encoder ASAP: ",
                             SmartDashboard.putBoolean("Wrist Encoder", false));
 
-    SmartDashboard.putNumber("Wrist Velocity", RobotMap.wrist.getSelectedSensorVelocity());
-    SmartDashboard.putNumber("Wrist Acceleration", RobotMap.wrist.getSelectedSensorVelocity());
+    
   }
 
   public void zeroWrist(){
@@ -35,6 +34,9 @@ public class Wrist extends Subsystem {
   public void wristPosition(double position){
     wrist.set(ControlMode.MotionMagic, position);
     System.out.println("Wrist Target Position: " + position);
+    SmartDashboard.putNumber("Wrist Velocity", RobotMap.wrist.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("Wrist Position", RobotMap.wrist.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Wrist Acceleration", RobotMap.wrist.getSelectedSensorVelocity());
   }
   public void stop(){
     wrist.set(0);

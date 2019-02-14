@@ -79,15 +79,15 @@ public class RobotMap {
     elevatorMaster.configFactoryDefault();
     elevatorMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     elevatorMaster.selectProfileSlot(0, 0);
-    elevatorMaster.config_kP(0, 0, 10);
-    elevatorMaster.config_kI(0, 0, 10);
+    elevatorMaster.config_kP(0, 5, 10);
+    elevatorMaster.config_kI(0, 0.1, 10);
     elevatorMaster.config_kD(0, 0, 10);
     elevatorMaster.config_kF(0, 0, 10);
     elevatorMaster.config_IntegralZone(0, 10, 10);
     elevatorMaster.configPeakOutputForward(1, 10);
     elevatorMaster.configPeakOutputReverse(-1, 10);
-    elevatorMaster.configMotionCruiseVelocity(1000, 10);
-    elevatorMaster.configMotionAcceleration(1000, 10);
+    elevatorMaster.configMotionCruiseVelocity(4000, 10);
+    elevatorMaster.configMotionAcceleration(2000, 10);
     elevatorMaster.setNeutralMode(NeutralMode.Brake);
 
     elevatorSlave = new WPI_VictorSPX(6);
@@ -101,14 +101,14 @@ public class RobotMap {
     wrist.configFactoryDefault();
     wrist.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     wrist.selectProfileSlot(0, 0);
-    wrist.config_kP(0, 0, 10);
+    wrist.config_kP(0, 1, 10);
     wrist.config_kI(0, 0, 10);
     wrist.config_kD(0, 0, 10);
     wrist.config_kF(0, 0, 10);
     wrist.config_IntegralZone(0, 10, 10);
     wrist.configPeakOutputForward(1, 10);
     wrist.configPeakOutputReverse(-1, 10);
-    wrist.configMotionCruiseVelocity(750, 10);
+    wrist.configMotionCruiseVelocity(1500, 10);
     wrist.configMotionAcceleration(1000, 10);
     wrist.setNeutralMode(NeutralMode.Brake);
 

@@ -1,7 +1,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class ElevatorCom extends Command {
   public double position;
@@ -19,6 +21,7 @@ public class ElevatorCom extends Command {
   @Override
   protected void execute() {
       Robot.elevator.elevatorPosition(position);
+      SmartDashboard.putNumber("Command Pos", position);
   }
 
   @Override
@@ -28,7 +31,7 @@ public class ElevatorCom extends Command {
 
   @Override
   protected void end() {
-    Robot.elevator.stop();
+    Robot.elevator.elevatorPosition(position);
   }
 
   @Override

@@ -12,7 +12,7 @@ import frc.robot.Equations;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.TalonChecker;
-import frc.robot.commands.ElevatorManual;
+import frc.robot.commands.ElevatorCom;
 
 public class Elevator extends Subsystem {
 
@@ -21,9 +21,11 @@ public class Elevator extends Subsystem {
 
   double previous_vel = 0;
 
+  double position;
+
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ElevatorManual());
+    setDefaultCommand(new ElevatorCom(this.position));
   }
 
   public Elevator(){
@@ -31,8 +33,7 @@ public class Elevator extends Subsystem {
                             "Could not detect Elevator Encoder. Switch to manual control and check encoder ASAP: ",
                             SmartDashboard.putBoolean("Elevator Encoder", TalonChecker.getTrueFalse()));
 
-    SmartDashboard.putNumber("Elevator Velocity", RobotMap.elevatorMaster.getSelectedSensorVelocity(0));
-    SmartDashboard.putNumber("Elevator Acceleration", RobotMap.elevatorMaster.getSelectedSensorVelocity(0)/0.02);
+    
   }
 
   public void zeroElevator(){
@@ -51,12 +52,30 @@ public class Elevator extends Subsystem {
   public double getElevatorAcceleration(){
     return (ElevatorMaster.getSelectedSensorVelocity(0) - previous_vel)/0.02;
   }
+
+  public boolean isFinished(){
+    return ElevatorMaster.getClosedLoopError() < 25;
+  }
+
+  public double getTarget(){
+    return position;
+  }
+
+  public double placeHatch(){
+    return this.position - 1000;
+  }
   
   public void elevatorPosition(double position){
 
     //if(Math.abs(gyro.getPitch()) > 25 || Math.abs(gyro.getRoll()) > 25){
     //  position = 0;
     //}
+    SmartDashboard.putNumber("Elevator Velocity", RobotMap.elevatorMaster.getSelectedSensorVelocity(0));
+    SmartDashboard.putNumber("Elevator Position", RobotMap.elevatorMaster.getSelectedSensorPosition(0));
+    SmartDashboard.putNumber("Elevator Target", position);
+    SmartDashboard.putNumber("Elevator Acceleration", RobotMap.elevatorMaster.getSelectedSensorVelocity(0)/0.02);
+    
+    this.position = position;
 
     ElevatorMaster.set(ControlMode.MotionMagic, position);
     SmartDashboard.putNumber("Elevator Target Position", position);

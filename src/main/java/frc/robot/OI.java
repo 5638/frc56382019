@@ -110,16 +110,17 @@ public class OI {
     retrieveHatch.whenPressed(new RetrieveHatch());
 
     placeHatch = new JoystickButton(xbox, 3);
-    placeHatch.whenPressed(new PlaceHatch());
+    placeHatch.whileHeld(new PlaceHatch());
 
-    preHatchIntake = new JoystickButton(buttonBoard2, 3);
+    preHatchIntake = new JoystickButton(buttonBoard2, 6);
     preHatchIntake.whenPressed(new Hatch(Value.kReverse, Value.kForward));
     //INTAKE END
 
     //WRIST START
     wristPos = new JoystickButton(xbox, 5);
     wristPos.whileHeld(new WristCom(-9000));
-    wristPos.whenReleased(new WristCom(630));
+    wristPos.whenReleased(new WristCom(-600));
+    placeHatch.whenReleased(new WristCom(-600));
     //WRIST END
 
 
