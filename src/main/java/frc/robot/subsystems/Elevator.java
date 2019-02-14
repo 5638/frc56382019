@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -17,6 +18,7 @@ import frc.robot.commands.ElevatorManual;
 public class Elevator extends Subsystem {
 
   private final WPI_TalonSRX ElevatorMaster = RobotMap.elevatorMaster;
+  private final WPI_VictorSPX ElevatorSlave = RobotMap.elevatorSlave;
   private final AHRS gyro = Robot.gyro;
 
   double previous_vel = 0;
@@ -33,7 +35,7 @@ public class Elevator extends Subsystem {
                             "Could not detect Elevator Encoder. Switch to manual control and check encoder ASAP: ",
                             SmartDashboard.putBoolean("Elevator Encoder", TalonChecker.getTrueFalse()));
 
-    
+
   }
 
   public void zeroElevator(){
@@ -64,21 +66,25 @@ public class Elevator extends Subsystem {
   public double placeHatch(){
     return this.position - 1000;
   }
-  
+
   public void elevatorPosition(double position){
 
-    //if(Math.abs(gyro.getPitch()) > 25 || Math.abs(gyro.getRoll()) > 25){
-    //  position = 0;
-    //}
+    if(Math.abs(gyro.getPitch()) > 25 || Math.abs(gyro.getRoll()) > 25){
+      position = 0;
+    }
+
     SmartDashboard.putNumber("Elevator Velocity", RobotMap.elevatorMaster.getSelectedSensorVelocity(0));
     SmartDashboard.putNumber("Elevator Position", RobotMap.elevatorMaster.getSelectedSensorPosition(0));
     SmartDashboard.putNumber("Elevator Target", position);
     SmartDashboard.putNumber("Elevator Acceleration", RobotMap.elevatorMaster.getSelectedSensorVelocity(0)/0.02);
-    
+
     this.position = position;
 
     ElevatorMaster.set(ControlMode.MotionMagic, position);
-    SmartDashboard.putNumber("Elevator output", ElevatorMaster.get());
+    ElevatorSlave.follow(ElevatorMaster);
+    SmartDashboard.putNumber("ElevatorMaster Output", ElevatorMaster.get());
+    SmartDashboard.putNumber("ElevatorSlave Output", ElevatorSlave.get());
+
     SmartDashboard.putNumber("Elevator Target Position", position);
     SmartDashboard.putNumber("Elevator Height", Equations.heightToInches(ElevatorMaster.getSelectedSensorPosition(0)));
   }
