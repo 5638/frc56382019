@@ -5,14 +5,14 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.Ball;
 import frc.robot.commands.ElevatorCom;
-import frc.robot.commands.ElevatorManual;
 import frc.robot.commands.Hatch;
 import frc.robot.commands.PlaceHatch;
 import frc.robot.commands.RetrieveHatch;
 import frc.robot.commands.Shift;
 import frc.robot.commands.VisionCom;
 import frc.robot.commands.WristCom;
-import frc.robot.commands.WristManual;
+import frc.robot.commands.ZeroElevator;
+import frc.robot.commands.ZeroWrist;
 
 public class OI {
 
@@ -33,10 +33,12 @@ public class OI {
   public JoystickButton elevatorLevel1Hatch;
   public JoystickButton elevatorLevel2Hatch;
   public JoystickButton elevatorLevel3Hatch;
+  public JoystickButton zeroElevator;
   //ELEVATOR END
 
   //WRIST START
   public JoystickButton wristPos;
+  public JoystickButton zeroWrist;
   //WRIST END
 
   //INTAKE START
@@ -91,6 +93,9 @@ public class OI {
 
     elevatorLevel3Hatch = new JoystickButton(buttonBoard1, 4);
     elevatorLevel3Hatch.whenPressed(new ElevatorCom(21100));
+
+    zeroElevator = new JoystickButton(buttonBoard2, 5);
+    zeroElevator.whenPressed(new ZeroElevator());
     //ELEVATOR END
 
     //INTAKE START
@@ -121,6 +126,9 @@ public class OI {
     wristPos.whileHeld(new WristCom(-9000));
     wristPos.whenReleased(new WristCom(-600));
     placeHatch.whenReleased(new WristCom(-600));
+    
+    zeroWrist = new JoystickButton(buttonBoard2, 4);
+    zeroWrist.whenPressed(new ZeroWrist());
     //WRIST END
 
 

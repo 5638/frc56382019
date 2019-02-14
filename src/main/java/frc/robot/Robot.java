@@ -2,13 +2,13 @@ package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.I2C.Port;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Ultrasonic;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
@@ -34,9 +34,14 @@ public class Robot extends TimedRobot {
     wrist = new Wrist();
     intake = new Intake();
     //ultrasonic = new Ultrasonic(1, 1);
-    gyro = new AHRS(Port.kMXP);
     m_oi = new OI();
     pdp = new PowerDistributionPanel();
+
+    try{
+      gyro = new AHRS(SPI.Port.kMXP);
+    }catch(RuntimeException ex){
+      DriverStation.reportError("gyro problem: " + ex.getMessage(), true);
+    }
 
     led = RobotMap.led;
 
@@ -77,6 +82,11 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue){
+      led.set(.83);
+    }else{
+      led.set(.61);
+    }
     teleopPeriodic();
   }
 
@@ -92,6 +102,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    
     if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue && DriverStation.getInstance().getMatchTime() > 30){
       led.set(.83);
     }else if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red && DriverStation.getInstance().getMatchTime() > 30){
