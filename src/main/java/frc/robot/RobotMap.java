@@ -89,8 +89,10 @@ public class RobotMap {
     elevatorMaster.configMotionCruiseVelocity(4000, 10);
     elevatorMaster.configMotionAcceleration(2000, 10);
     elevatorMaster.setNeutralMode(NeutralMode.Brake);
+    elevatorMaster.setInverted(true);
 
     elevatorSlave = new WPI_VictorSPX(6);
+    elevatorMaster.setInverted(true);
     elevatorSlave.follow(elevatorMaster);
 
     System.out.println("ELEVATOR ... WE ARE GO.");
