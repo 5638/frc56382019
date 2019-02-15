@@ -10,7 +10,7 @@ import frc.robot.RobotMap;
 public class RetrieveHatch extends CommandGroup {
 
   public RetrieveHatch() {
-    addParallel(new ElevatorCom(RobotMap.elevatorMaster.getSelectedSensorPosition(0) + 1000)); //raises elevator 4 inches before clamp
+    addParallel(new ElevatorCom(2500)); //raises elevator 4 inches before clamp
     Timer.delay(1.5);
     addParallel(new Hatch(Value.kReverse, Value.kReverse));
   }
