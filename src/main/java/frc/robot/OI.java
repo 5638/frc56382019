@@ -78,27 +78,27 @@ public class OI {
     elevatorLevel1Cargo.whenPressed(new ElevatorCom(0));
 
     elevatorLevel2Cargo = new JoystickButton(buttonBoard1, 2);
-    elevatorLevel2Cargo.whenPressed(new ElevatorCom(-9900));
+    elevatorLevel2Cargo.whenPressed(new ElevatorCom(9900));
 
     elevatorLevel3Cargo = new JoystickButton(buttonBoard1, 1);
-    elevatorLevel3Cargo.whenPressed(new ElevatorCom(-20100));
+    elevatorLevel3Cargo.whenPressed(new ElevatorCom(20100));
 
     elevatorLevel1Hatch = new JoystickButton(buttonBoard1, 6);
-    elevatorLevel1Hatch.whenPressed(new ElevatorCom(-2300));
+    elevatorLevel1Hatch.whenPressed(new ElevatorCom(1800));
 
     elevatorLevel2Hatch = new JoystickButton(buttonBoard1, 5);
-    elevatorLevel2Hatch.whenPressed(new ElevatorCom(-12000));
+    elevatorLevel2Hatch.whenPressed(new ElevatorCom(12000));
 
     elevatorLevel3Hatch = new JoystickButton(buttonBoard1, 4);
-    elevatorLevel3Hatch.whenPressed(new ElevatorCom(-21100));
+    elevatorLevel3Hatch.whenPressed(new ElevatorCom(21100));
     //ELEVATOR END
 
     //INTAKE START
     intakeBall = new JoystickButton(xbox, 5);
-    intakeBall.whileHeld(new Ball(-.5, -.5));
+    intakeBall.whileHeld(new Ball(-1, -1));
 
     outakeBall = new JoystickButton(xbox, 6);
-    outakeBall.whileHeld(new Ball(.5, .5));
+    outakeBall.whileHeld(new Ball(1, 1));
 
     retractHatch = new JoystickButton(buttonBoard1, 8);
     retractHatch.whenPressed(new Hatch(Value.kReverse, Value.kReverse));
@@ -110,7 +110,7 @@ public class OI {
     retrieveHatch.whenPressed(new RetrieveHatch());
 
     placeHatch = new JoystickButton(xbox, 3);
-    placeHatch.whileHeld(new PlaceHatch());
+    placeHatch.whenPressed(new PlaceHatch());
 
     preHatchIntake = new JoystickButton(buttonBoard2, 6);
     preHatchIntake.whenPressed(new Hatch(Value.kReverse, Value.kForward));
@@ -118,8 +118,8 @@ public class OI {
 
     //WRIST START
     wristPos = new JoystickButton(xbox, 5);
-    wristPos.whileHeld(new WristCom(-9000));
-    wristPos.whenReleased(new WristCom(-600));
+    wristPos.whileHeld(new WristCom(-8000));
+    wristPos.whenReleased(new WristCom(-300));
     placeHatch.whenReleased(new WristCom(-600));
     //WRIST END
 

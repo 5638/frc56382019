@@ -11,6 +11,8 @@ public class PlaceHatch extends CommandGroup {
 
   public PlaceHatch() {
     addParallel(new Hatch(Value.kReverse, Value.kForward)); //unclamp
-    addSequential(new ElevatorCom(0));
+    Timer.delay(.25);
+    addSequential(new WristCom(-1000));
   }
 }
+

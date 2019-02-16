@@ -83,19 +83,19 @@ public class RobotMap {
     elevatorMaster.config_kP(0, 5, 10);
     elevatorMaster.config_kI(0, 0.1, 10);
     elevatorMaster.config_kD(0, 0, 10);
-    elevatorMaster.config_kF(0, 0, 10);
+    elevatorMaster.config_kF(0, 5, 10);
     elevatorMaster.config_IntegralZone(0, 10, 10);
     elevatorMaster.configPeakOutputForward(1, 10);
     elevatorMaster.configPeakOutputReverse(-1, 10);
-    elevatorMaster.configMotionCruiseVelocity(1000, 10);
-    elevatorMaster.configMotionAcceleration(500, 10);
+    elevatorMaster.configMotionCruiseVelocity(1300, 10);
+    elevatorMaster.configMotionAcceleration(1000, 10);
     elevatorMaster.setNeutralMode(NeutralMode.Brake);
-    elevatorMaster.setInverted(false);
-    //elevatorMaster.setInverted(true);
+    elevatorMaster.setInverted(true);
+    elevatorMaster.setSensorPhase(true);
 
     elevatorSlave = new WPI_VictorSPX(6);
     elevatorSlave.follow(elevatorMaster);
-    elevatorSlave.setInverted(false);
+    elevatorSlave.setInverted(true);
 
     System.out.println("ELEVATOR ... WE ARE GO.");
     //ELEVATOR END

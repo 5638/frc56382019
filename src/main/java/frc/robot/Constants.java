@@ -11,11 +11,11 @@ package frc.robot;
  * Add your docs here.
  */
 public class Constants {
-/*
-    static double position = RobotMap.elevatorMaster.getSelectedSensorPosition();
+
+    double position = RobotMap.elevatorMaster.getSelectedSensorPosition();
     static double setpoint;
 
-    public static double hatchPlace(){
+    public double hatchPlace(){
         if(position < 2500){
             setpoint = 2000;
         }else if(position > 11000 && position < 13000){
@@ -24,6 +24,6 @@ public class Constants {
             setpoint = 20800;
         }
         return setpoint;
-    }*/
+    }
     
 }

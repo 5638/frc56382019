@@ -14,9 +14,9 @@ import frc.robot.RobotMap;
 import frc.robot.commands.DriveCom;
 
 public class DriveTrain extends Subsystem {
-  double  kp = .05, 
-          ki = 0.1, 
-          kd = 0.005;
+  double  kp = .5, 
+          ki = 0, 
+          kd = 0;
 
   private final DifferentialDrive drive = RobotMap.drive;
   private final DoubleSolenoid shift = RobotMap.shift;
@@ -87,7 +87,7 @@ public class DriveTrain extends Subsystem {
     double visionOutput = (kp*error) + (ki * integral) + (kd * derivative);
 
     drive.setSafetyEnabled(false);
-    drive.arcadeDrive((-xbox.getRawAxis(2) + xbox.getRawAxis(3)), -visionOutput);
+    drive.arcadeDrive((xbox.getRawAxis(2) - xbox.getRawAxis(3)), -visionOutput);
     System.out.println("Final Motor Output: " + visionOutput);
   }
 

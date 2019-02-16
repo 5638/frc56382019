@@ -64,7 +64,15 @@ public class Elevator extends Subsystem {
   }
 
   public double placeHatch(){
-    return this.position - 1000;
+      if(position < 2500){
+        return 2000;
+      }else if(position > 11000 && position < 13000){
+        return 11700;
+      }else if(position > 20100 && position < 22100){
+        return 20800;
+      }else{
+        return 0;
+      }
   }
 
   public void elevatorPosition(double position){
@@ -78,7 +86,7 @@ public class Elevator extends Subsystem {
     SmartDashboard.putNumber("Elevator Target", position);
     SmartDashboard.putNumber("Elevator Acceleration", RobotMap.elevatorMaster.getSelectedSensorVelocity(0)/0.02);
 
-    this.position = position;
+    //this.position = position;
 
     ElevatorMaster.set(ControlMode.MotionMagic, position);
     SmartDashboard.putNumber("ElevatorMaster Output", ElevatorMaster.getMotorOutputPercent());
