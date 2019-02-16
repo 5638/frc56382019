@@ -1,6 +1,7 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -86,14 +87,15 @@ public class RobotMap {
     elevatorMaster.config_IntegralZone(0, 10, 10);
     elevatorMaster.configPeakOutputForward(1, 10);
     elevatorMaster.configPeakOutputReverse(-1, 10);
-    elevatorMaster.configMotionCruiseVelocity(4000, 10);
-    elevatorMaster.configMotionAcceleration(2000, 10);
+    elevatorMaster.configMotionCruiseVelocity(1000, 10);
+    elevatorMaster.configMotionAcceleration(500, 10);
     elevatorMaster.setNeutralMode(NeutralMode.Brake);
-    elevatorMaster.setInverted(true);
+    elevatorMaster.setInverted(false);
+    //elevatorMaster.setInverted(true);
 
     elevatorSlave = new WPI_VictorSPX(6);
-    elevatorMaster.setInverted(true);
     elevatorSlave.follow(elevatorMaster);
+    elevatorSlave.setInverted(false);
 
     System.out.println("ELEVATOR ... WE ARE GO.");
     //ELEVATOR END

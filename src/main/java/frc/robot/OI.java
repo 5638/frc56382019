@@ -78,19 +78,19 @@ public class OI {
     elevatorLevel1Cargo.whenPressed(new ElevatorCom(0));
 
     elevatorLevel2Cargo = new JoystickButton(buttonBoard1, 2);
-    elevatorLevel2Cargo.whenPressed(new ElevatorCom(9900));
+    elevatorLevel2Cargo.whenPressed(new ElevatorCom(-9900));
 
     elevatorLevel3Cargo = new JoystickButton(buttonBoard1, 1);
-    elevatorLevel3Cargo.whenPressed(new ElevatorCom(20100));
+    elevatorLevel3Cargo.whenPressed(new ElevatorCom(-20100));
 
     elevatorLevel1Hatch = new JoystickButton(buttonBoard1, 6);
-    elevatorLevel1Hatch.whenPressed(new ElevatorCom(2300));
+    elevatorLevel1Hatch.whenPressed(new ElevatorCom(-2300));
 
     elevatorLevel2Hatch = new JoystickButton(buttonBoard1, 5);
-    elevatorLevel2Hatch.whenPressed(new ElevatorCom(12000));
+    elevatorLevel2Hatch.whenPressed(new ElevatorCom(-12000));
 
     elevatorLevel3Hatch = new JoystickButton(buttonBoard1, 4);
-    elevatorLevel3Hatch.whenPressed(new ElevatorCom(21100));
+    elevatorLevel3Hatch.whenPressed(new ElevatorCom(-21100));
     //ELEVATOR END
 
     //INTAKE START

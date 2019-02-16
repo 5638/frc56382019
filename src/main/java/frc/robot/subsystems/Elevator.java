@@ -81,9 +81,8 @@ public class Elevator extends Subsystem {
     this.position = position;
 
     ElevatorMaster.set(ControlMode.MotionMagic, position);
-    ElevatorSlave.follow(ElevatorMaster);
-    SmartDashboard.putNumber("ElevatorMaster Output", ElevatorMaster.get());
-    SmartDashboard.putNumber("ElevatorSlave Output", ElevatorSlave.get());
+    SmartDashboard.putNumber("ElevatorMaster Output", ElevatorMaster.getMotorOutputPercent());
+    SmartDashboard.putNumber("ElevatorSlave Output", ElevatorSlave.getMotorOutputPercent());
 
     SmartDashboard.putNumber("Elevator Target Position", position);
     SmartDashboard.putNumber("Elevator Height", Equations.heightToInches(ElevatorMaster.getSelectedSensorPosition(0)));
@@ -91,6 +90,11 @@ public class Elevator extends Subsystem {
 
   public void elevatorManualControl(Joystick xbox){
     ElevatorMaster.set(xbox.getRawAxis(1) * xbox.getRawAxis(1) * xbox.getRawAxis(1));
+    SmartDashboard.putNumber("Elevator Velocity", RobotMap.elevatorMaster.getSelectedSensorVelocity(0));
+    SmartDashboard.putNumber("Elevator Position", RobotMap.elevatorMaster.getSelectedSensorPosition(0));
+    SmartDashboard.putNumber("Elevator Acceleration", RobotMap.elevatorMaster.getSelectedSensorVelocity(0)/0.02);
+    SmartDashboard.putNumber("ElevatorMaster Output", ElevatorMaster.getMotorOutputPercent());
+    SmartDashboard.putNumber("ElevatorSlave Output", ElevatorSlave.getMotorOutputPercent());
   }
 
   public void stop(){

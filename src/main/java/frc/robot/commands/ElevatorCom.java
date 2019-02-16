@@ -20,7 +20,7 @@ public class ElevatorCom extends Command {
 
   @Override
   protected void execute() {
-      Robot.elevator.elevatorPosition(position);
+      //Robot.elevator.elevatorPosition(position);
       SmartDashboard.putNumber("Command Pos", position);
       
   }

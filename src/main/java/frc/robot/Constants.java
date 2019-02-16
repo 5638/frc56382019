@@ -11,7 +11,7 @@ package frc.robot;
  * Add your docs here.
  */
 public class Constants {
-
+/*
     static double position = RobotMap.elevatorMaster.getSelectedSensorPosition();
     static double setpoint;
 
@@ -24,5 +24,6 @@ public class Constants {
             setpoint = 20800;
         }
         return setpoint;
-    }
+    }*/
+    
 }

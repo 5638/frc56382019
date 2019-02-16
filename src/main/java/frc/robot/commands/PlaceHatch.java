@@ -11,6 +11,6 @@ public class PlaceHatch extends CommandGroup {
 
   public PlaceHatch() {
     addParallel(new Hatch(Value.kReverse, Value.kForward)); //unclamp
-    addSequential(new ElevatorCom(Constants.hatchPlace()));
+    addSequential(new ElevatorCom(0));
   }
 }
