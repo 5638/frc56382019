@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -7,6 +8,8 @@ import frc.robot.RobotMap;
 
 public class ElevatorCom extends Command {
   public double position;
+
+  private final DigitalInput limitSwitch = RobotMap.elevatorLimitSwitch;
 
   public ElevatorCom(double position) {
     requires(Robot.elevator);
@@ -27,12 +30,13 @@ public class ElevatorCom extends Command {
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return limitSwitch.get();
   }
 
   @Override
   protected void end() {
     Robot.elevator.stop();
+    Robot.elevator.zeroElevator();
   }
 
   @Override

@@ -1,11 +1,11 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -31,6 +31,7 @@ public class RobotMap {
   //ELEVATOR START
   public static WPI_TalonSRX elevatorMaster;
   public static WPI_VictorSPX elevatorSlave;
+  public static DigitalInput elevatorLimitSwitch;
   //ELEVATOR END
 
   //WRIST START
@@ -96,6 +97,8 @@ public class RobotMap {
     elevatorSlave = new WPI_VictorSPX(6);
     elevatorSlave.follow(elevatorMaster);
     elevatorSlave.setInverted(true);
+
+    elevatorLimitSwitch = new DigitalInput(9);
 
     System.out.println("ELEVATOR ... WE ARE GO.");
     //ELEVATOR END
