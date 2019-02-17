@@ -13,7 +13,7 @@ public class RetrieveHatch extends CommandGroup {
   public RetrieveHatch() {
     
     addParallel(new ElevatorCom(2800)); //raises elevator 4 inches before clamp
-    addSequential(new WaitCommand(1));
+    addSequential(new WaitCommand(.75));
     addSequential(new Hatch(Value.kReverse, Value.kReverse));
   }
 }

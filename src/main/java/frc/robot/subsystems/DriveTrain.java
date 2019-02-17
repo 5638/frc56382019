@@ -14,7 +14,7 @@ import frc.robot.RobotMap;
 import frc.robot.commands.DriveCom;
 
 public class DriveTrain extends Subsystem {
-  double  kp = .5, 
+  double  kp = .25, 
           ki = 0, 
           kd = 0;
 

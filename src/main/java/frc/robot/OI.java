@@ -84,7 +84,7 @@ public class OI {
     elevatorLevel3Cargo.whenPressed(new ElevatorCom(20100));
 
     elevatorLevel1Hatch = new JoystickButton(buttonBoard1, 6);
-    elevatorLevel1Hatch.whenPressed(new ElevatorCom(1800));
+    elevatorLevel1Hatch.whenPressed(new ElevatorCom(1700));
 
     elevatorLevel2Hatch = new JoystickButton(buttonBoard1, 5);
     elevatorLevel2Hatch.whenPressed(new ElevatorCom(12000));
@@ -118,9 +118,9 @@ public class OI {
 
     //WRIST START
     wristPos = new JoystickButton(xbox, 5);
-    wristPos.whileHeld(new WristCom(-8000));
+    wristPos.whileHeld(new WristCom(-8500));
     wristPos.whenReleased(new WristCom(-300));
-    placeHatch.whenReleased(new WristCom(-600));
+    placeHatch.whenReleased(new WristCom(-300));
     //WRIST END
 
 
