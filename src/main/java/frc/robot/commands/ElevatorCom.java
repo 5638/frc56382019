@@ -30,13 +30,12 @@ public class ElevatorCom extends Command {
 
   @Override
   protected boolean isFinished() {
-    return limitSwitch.get();
+    return false;
   }
 
   @Override
   protected void end() {
     Robot.elevator.stop();
-    Robot.elevator.zeroElevator();
   }
 
   @Override

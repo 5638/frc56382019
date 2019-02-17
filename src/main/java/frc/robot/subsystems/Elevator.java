@@ -6,6 +6,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.DigitalGlitchFilter;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,6 +22,7 @@ public class Elevator extends Subsystem {
   private final WPI_TalonSRX ElevatorMaster = RobotMap.elevatorMaster;
   private final WPI_VictorSPX ElevatorSlave = RobotMap.elevatorSlave;
   private final AHRS gyro = Robot.gyro;
+  private final DigitalInput limitSwitch = RobotMap.elevatorLimitSwitch;
 
   double previous_vel = 0;
 
@@ -86,8 +89,11 @@ public class Elevator extends Subsystem {
     SmartDashboard.putNumber("Elevator Target", position);
     SmartDashboard.putNumber("Elevator Acceleration", RobotMap.elevatorMaster.getSelectedSensorVelocity(0)/0.02);
 
-    //this.position = position;
+    if(!limitSwitch.get()){
+      zeroElevator();
+    }
 
+    
     ElevatorMaster.set(ControlMode.MotionMagic, position);
     SmartDashboard.putNumber("ElevatorMaster Output", ElevatorMaster.getMotorOutputPercent());
     SmartDashboard.putNumber("ElevatorSlave Output", ElevatorSlave.getMotorOutputPercent());
