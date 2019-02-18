@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.Ball;
+import frc.robot.commands.DriveCom;
 import frc.robot.commands.ElevatorCom;
 import frc.robot.commands.ElevatorManual;
 import frc.robot.commands.Hatch;
@@ -69,8 +70,8 @@ public class OI {
     vision.whileHeld(new VisionCom());
 
     shift = new JoystickButton(xbox, 4);
-    shift.whileHeld(new Shift(Value.kForward));
-    shift.whenReleased(new Shift(Value.kReverse));
+    shift.whileHeld(new DriveCom(Value.kReverse));
+    shift.whenReleased(new DriveCom(Value.kForward));
     //DRIVE END
 
     //ELEVATOR START

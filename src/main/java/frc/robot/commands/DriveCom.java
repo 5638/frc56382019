@@ -1,11 +1,16 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class DriveCom extends Command {
-  public DriveCom() {
+
+  public Value value;
+
+  public DriveCom(Value value) {
     requires(Robot.driveTrain);
+    this.value = value;
   }
 
   @Override
@@ -15,6 +20,7 @@ public class DriveCom extends Command {
   @Override
   protected void execute() {
     Robot.driveTrain.drive(Robot.m_oi.xbox);
+    Robot.driveTrain.shift(value);
   }
 
   @Override

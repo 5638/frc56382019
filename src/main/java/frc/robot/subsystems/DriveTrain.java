@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveCom;
+import frc.robot.commands.Shift;
 
 public class DriveTrain extends Subsystem {
   double  kp = .1, 
@@ -32,7 +33,7 @@ public class DriveTrain extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new DriveCom());
+    setDefaultCommand(new DriveCom(Value.kForward));
   }
 
   private double getElevatorHeight(){
@@ -150,7 +151,7 @@ public class DriveTrain extends Subsystem {
 
   public void shift(Value value){
     shift.set(value);
-
+/*
     if(wantsHigh() && isLow() && canShift()){
       shift.set(setHigh());
       hasShifted = true;
@@ -158,5 +159,6 @@ public class DriveTrain extends Subsystem {
       shift.set(setLow());
       hasShifted = true;
     }
+    */
   }
 }
