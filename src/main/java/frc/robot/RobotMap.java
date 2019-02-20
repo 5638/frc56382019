@@ -82,9 +82,9 @@ public class RobotMap {
     elevatorMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     elevatorMaster.selectProfileSlot(0, 0);
     elevatorMaster.config_kP(0, 5, 10);
-    elevatorMaster.config_kI(0, 0.1, 10);
-    elevatorMaster.config_kD(0, 0, 10);
-    elevatorMaster.config_kF(0, 5, 10);
+    elevatorMaster.config_kI(0, 0, 10);
+    elevatorMaster.config_kD(0, 20, 10);
+    elevatorMaster.config_kF(0, 0, 10);
     elevatorMaster.config_IntegralZone(0, 10, 10);
     elevatorMaster.configPeakOutputForward(1, 10);
     elevatorMaster.configPeakOutputReverse(-1, 10);
