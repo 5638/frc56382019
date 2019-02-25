@@ -1,8 +1,7 @@
 # FRC 2019
 
-Welcome to LqPV Robotics' 2019 Robot Code! Here, you will find all of our subsystems and commands which run our robot.
-![](img/tank.png)
-![](img/robot.png)
+Welcome to LqPV Robotics' 2019 Robot Code! Here you will find all of our subsystems and commands which run our robot.
+<img src="img/logo.jpg" width="60%" height="60%"/> <img src="img/robot.jpg" width="20%" height="20%"/>
 ## Features
 - Motion Magic control on Elevator and Wrist subsystems.
 - Drive motor voltage ramping proportional to elevator height.
