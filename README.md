@@ -43,7 +43,7 @@ This class checks if the encoder is nominal on boot of the RoboRio.
 
 ## RobotMap
 
-Where we initiate all of our solenoids and motors. We also set our PIDF values here for Motion Magic.
+Where we instantiate all of our solenoids and motors. We also set our PIDF values here for Motion Magic.
 
 ## Robot
 
