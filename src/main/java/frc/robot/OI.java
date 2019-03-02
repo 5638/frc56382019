@@ -38,6 +38,7 @@ public class OI {
 
   //WRIST START
   public JoystickButton wristPos;
+  public JoystickButton wristPosCargo;
   //WRIST END
 
   //INTAKE START
@@ -122,6 +123,9 @@ public class OI {
     wristPos.whileHeld(new WristCom(-8500));
     wristPos.whenReleased(new WristCom(-300));
     placeHatch.whenReleased(new WristCom(-300));
+
+    wristPosCargo = new JoystickButton(xbox, 7); //LEFT STICK
+    wristPosCargo.whenPressed(new WristCom(-3000));
     //WRIST END
 
 
