@@ -9,8 +9,6 @@ import frc.robot.RobotMap;
 public class ElevatorCom extends Command {
   public double position;
 
-  private final DigitalInput limitSwitch = RobotMap.elevatorLimitSwitch;
-
   public ElevatorCom(double position) {
     requires(Robot.elevator);
     this.position = position;
