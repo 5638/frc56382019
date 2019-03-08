@@ -7,6 +7,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.TalonChecker;
 import frc.robot.commands.WristManual;
@@ -24,8 +25,6 @@ public class Wrist extends Subsystem {
     TalonChecker.checkError("Wrist", wrist.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 100), 
                             "Could not detect Wrist Encoder. Switch to manual control and check encoder ASAP: ",
                             SmartDashboard.putBoolean("Wrist Encoder", false));
-
-    
   }
 
   public void zeroWrist(){
@@ -33,6 +32,7 @@ public class Wrist extends Subsystem {
   }
   public void wristPosition(double position){
     wrist.set(ControlMode.MotionMagic, position);
+    
     System.out.println("Wrist Target Position: " + position);
     SmartDashboard.putNumber("Wrist Velocity", RobotMap.wrist.getSelectedSensorVelocity());
     SmartDashboard.putNumber("Wrist Position", RobotMap.wrist.getSelectedSensorPosition());
