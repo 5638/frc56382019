@@ -124,7 +124,7 @@ public class OI {
     wristPos.whenReleased(new WristCom(-300));
     placeHatch.whenReleased(new WristCom(-300));
 
-    wristPosCargo = new JoystickButton(xbox, 7); //LEFT STICK
+    wristPosCargo = new JoystickButton(xbox, 9); //LEFT STICK
     wristPosCargo.whenPressed(new WristCom(-3000));
     //WRIST END
 

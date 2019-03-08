@@ -8,6 +8,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Equations;
@@ -15,13 +16,17 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.TalonChecker;
 import frc.robot.commands.ElevatorManual;
+import frc.robot.commands.WristCom;
 
 public class Elevator extends Subsystem {
+
+  //double wristPos;
 
   private final WPI_TalonSRX ElevatorMaster = RobotMap.elevatorMaster;
   private final WPI_VictorSPX ElevatorSlave = RobotMap.elevatorSlave;
   private final AHRS gyro = Robot.gyro;
   private final DigitalInput limitSwitch = RobotMap.elevatorLimitSwitch;
+  //private final Command wristCom = new WristCom(wristPos);
 
   double previous_vel = 0;
 
@@ -99,6 +104,8 @@ public class Elevator extends Subsystem {
 
     SmartDashboard.putNumber("Elevator Target Position", position);
     SmartDashboard.putNumber("Elevator Height", Equations.heightToInches(ElevatorMaster.getSelectedSensorPosition(0)));
+
+    
   }
 
   public void elevatorManualControl(Joystick xbox){

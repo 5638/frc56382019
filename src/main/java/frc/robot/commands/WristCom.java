@@ -12,13 +12,7 @@ public class WristCom extends Command {
     requires(Robot.wrist);
     this.position = position; //this sets the class variable equal to the function variable.
 
-    //CHANGE BEFORE LSR
-    if(elevatorVelocity > 100){
-      this.position = -1000;
-    }else{
-      this.position = position;
-    }
-    //CHANGE BEFORE LSR
+    
 
     //MOVES WRIST OUT OF WAY SO IT DOES NOT GET STUCK ON ELEVATOR
   }
@@ -29,7 +23,15 @@ public class WristCom extends Command {
 
   @Override
   protected void execute() {
-    Robot.wrist.wristPosition(position);
+    
+
+    //CHANGE BEFORE LSR
+    if(Math.abs(Robot.elevator.getElevatorVelocity()) > 100 && Robot.elevator.getElevatorPosition() > 10000){
+      Robot.wrist.wristPosition(-1000);
+    }else{
+      Robot.wrist.wristPosition(position);
+    }
+    //CHANGE BEFORE LSR
   }
 
   @Override
