@@ -98,6 +98,7 @@ public class OI {
     //INTAKE START
     intakeBall = new JoystickButton(xbox, 5);
     intakeBall.whileHeld(new Ball(-1, -1));
+    intakeBall.whenReleased(new Ball(-.5, -.5));
 
     outakeBall = new JoystickButton(xbox, 6);
     outakeBall.whileHeld(new Ball(1, 1));
