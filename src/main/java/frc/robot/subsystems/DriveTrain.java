@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -12,7 +12,10 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveCom;
-import frc.robot.commands.Shift;
+import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.Trajectory;
+import jaci.pathfinder.Waypoint;
+import jaci.pathfinder.modifiers.TankModifier;
 
 public class DriveTrain extends Subsystem {
   double  kp = .1, 
@@ -24,6 +27,10 @@ public class DriveTrain extends Subsystem {
   private final WPI_TalonSRX right = RobotMap.rightMaster;
   private final WPI_TalonSRX left = RobotMap.leftMaster;
   private final WPI_TalonSRX elevator = RobotMap.elevatorMaster;
+
+  public Trajectory leftTraj;
+  public Trajectory rightTraj;
+  public Trajectory trajectory;
 
   private static final double maxElevatorHeight = 21100;
 
@@ -161,4 +168,39 @@ public class DriveTrain extends Subsystem {
     }
     */
   }
+
+
+  public void genPath(){
+    Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, 1.7, 2.0, 60.0);
+        Waypoint[] points = new Waypoint[] {
+                new Waypoint(-4, -1, Pathfinder.d2r(-45)),
+                new Waypoint(-2, -2, 0),
+                new Waypoint(0, 0, 0)
+      };
+
+    trajectory = Pathfinder.generate(points, config);
+
+    // Wheelbase Width = 0.5m
+    TankModifier modifier = new TankModifier(trajectory).modify(0.5);
+
+    // Do something with the new Trajectories...
+    leftTraj = modifier.getLeftTrajectory();
+    rightTraj = modifier.getRightTrajectory();
+  }
+
+  public void followPath(){
+    for (int i = 0; i < leftTraj.length(); i++) {
+      Trajectory.Segment leftSeg = leftTraj.get(i);
+      Trajectory.Segment rightSeg = rightTraj.get(i);
+
+      left.set(ControlMode.Velocity, leftSeg.velocity);
+      right.set(ControlMode.Velocity, rightSeg.velocity);
+      
+      System.out.printf("%f,%f,%f,%f,%f,%f,%f,%f\n", 
+          leftSeg.dt, leftSeg.x, leftSeg.y, leftSeg.position, leftSeg.velocity, 
+              leftSeg.acceleration, leftSeg.jerk, leftSeg.heading);
+  }
+  }
 }
+
+
