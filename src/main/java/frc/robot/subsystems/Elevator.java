@@ -8,15 +8,13 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Equations;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.TalonChecker;
-import frc.robot.commands.ElevatorManual;
-import frc.robot.commands.WristCom;
+import frc.robot.commands.ElevatorCom;
 
 public class Elevator extends Subsystem {
 
@@ -34,7 +32,7 @@ public class Elevator extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ElevatorManual());
+    setDefaultCommand(new ElevatorCom(0));
   }
 
   public Elevator(){

@@ -2,6 +2,7 @@ package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -48,6 +49,8 @@ public class Robot extends TimedRobot {
     wrist.zeroWrist();
     gyro.reset();
     driveTrain.shift(Value.kForward);
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
 
     System.out.println("DRIVE TEAM, THIS IS ROBOT, I AM GO FOR LAUNCH.");
   }

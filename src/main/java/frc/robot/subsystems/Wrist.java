@@ -7,10 +7,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.TalonChecker;
-import frc.robot.commands.WristManual;
+import frc.robot.commands.WristCom;
 
 public class Wrist extends Subsystem {
   
@@ -18,7 +17,7 @@ public class Wrist extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new WristManual());
+    setDefaultCommand(new WristCom(-300));
   }
 
   public Wrist(){
