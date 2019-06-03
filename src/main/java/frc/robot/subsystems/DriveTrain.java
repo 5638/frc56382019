@@ -7,9 +7,14 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants;
+import frc.robot.Equations;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveCom;
 import jaci.pathfinder.Pathfinder;
@@ -37,6 +42,8 @@ public class DriveTrain extends Subsystem {
   private double integral, previous_error = 0;
 
   public boolean hasShifted = false;
+
+  public double prev_time = 0;
 
   @Override
   public void initDefaultCommand() {
@@ -171,7 +178,7 @@ public class DriveTrain extends Subsystem {
 
 
   public void genPath(){
-    Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, 1.7, 2.0, 60.0);
+    Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, 5.2, 10, 30);
         Waypoint[] points = new Waypoint[] {
                 new Waypoint(-4, -1, Pathfinder.d2r(-45)),
                 new Waypoint(-2, -2, 0),
@@ -188,18 +195,28 @@ public class DriveTrain extends Subsystem {
     rightTraj = modifier.getRightTrajectory();
   }
 
-  public void followPath(){
+  public void followPath() {
     for (int i = 0; i < leftTraj.length(); i++) {
       Trajectory.Segment leftSeg = leftTraj.get(i);
       Trajectory.Segment rightSeg = rightTraj.get(i);
 
-      left.set(ControlMode.Velocity, leftSeg.velocity);
-      right.set(ControlMode.Velocity, rightSeg.velocity);
+      double leftvel = Equations.metersPerSecond_to_unitsPerSecond(leftSeg.velocity);
+      double rightvel = Equations.metersPerSecond_to_unitsPerSecond(rightSeg.velocity);
+
+      left.set(ControlMode.Velocity, leftvel);
+      right.set(ControlMode.Velocity, rightvel);
       
       System.out.printf("%f,%f,%f,%f,%f,%f,%f,%f\n", 
           leftSeg.dt, leftSeg.x, leftSeg.y, leftSeg.position, leftSeg.velocity, 
-              leftSeg.acceleration, leftSeg.jerk, leftSeg.heading);
-  }
+          leftSeg.acceleration, leftSeg.jerk, leftSeg.heading);
+
+      double cur_time = Timer.getFPGATimestamp();
+      double d_t = cur_time - prev_time;
+      prev_time = cur_time;
+      System.out.println("TIME: "+d_t);
+      System.out.println("VEL: "+left.getClosedLoopTarget()+" "+right.getClosedLoopTarget());
+      Timer.delay(.05);
+    }
   }
 }
 

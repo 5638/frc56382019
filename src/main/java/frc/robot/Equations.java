@@ -44,4 +44,8 @@ public class Equations {
     public static double hatchInches(){
         return 4;
     }
+
+    public static double metersPerSecond_to_unitsPerSecond(double metersPerSecond){
+        return metersPerSecond/0.0001168; //(m/s)  /  (10.866rot/m)*(4096units/rot) left with units/sec
+    }
 }
