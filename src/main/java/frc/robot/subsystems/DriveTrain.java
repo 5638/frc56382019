@@ -180,6 +180,8 @@ public class DriveTrain extends Subsystem {
   public void genPath(){
     Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, 5.2, 10, 30);
         Waypoint[] points = new Waypoint[] {
+		//WHAT THE PATH SHOULD LOOK LIKE
+		//https://www.desmos.com/calculator/kltrsw6nqh
                 new Waypoint(-4, -1, Pathfinder.d2r(-45)),
                 new Waypoint(-2, -2, 0),
                 new Waypoint(0, 0, 0)
