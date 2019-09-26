@@ -54,6 +54,7 @@ public class Robot extends TimedRobot {
 
     System.out.println("DRIVE TEAM, THIS IS ROBOT, I AM GO FOR LAUNCH.");
     driveTrain.genPath();
+    driveTrain.followPath();
   }
 
   @Override
