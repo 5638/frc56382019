@@ -73,8 +73,8 @@ public class OI {
     shift.whileHeld(new DriveCom(Value.kReverse));
     shift.whenReleased(new DriveCom(Value.kForward));
 
-    followPath = new JoystickButton(xbox, 8);
-    followPath.whileHeld(new FollowPath());
+    //followPath = new JoystickButton(xbox, 8);
+    //followPath.whileHeld(new FollowPath());
     //DRIVE END
 
     //ELEVATOR START

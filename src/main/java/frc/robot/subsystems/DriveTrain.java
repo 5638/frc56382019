@@ -56,7 +56,7 @@ public class DriveTrain extends Subsystem {
   public void drive(Joystick xbox){
     drive.arcadeDrive((xbox.getRawAxis(2) - xbox.getRawAxis(3)), -xbox.getRawAxis(0));
 
-    double rampSpeed = (2 * (getElevatorHeight()/maxElevatorHeight)) + 1;
+    double rampSpeed = (2 * (getElevatorHeight()/maxElevatorHeight));
     //SmartDashboard.putNumber("DT Ramp Speed", getRampRate());
     SmartDashboard.putNumber("DT Velocity", getAverageVelocity());
     SmartDashboard.putNumber("DT Acceleration", getAverageAcceleration());
